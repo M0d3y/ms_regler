@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.9"
+    ComputedModelVersion    "1.11"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -38,9 +38,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "dAN"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Wed Aug 22 02:04:12 2012"
-  RTWModifiedTimeStamp	  267493421
-  ModelVersionFormat	  "1.%<AutoIncrement:9>"
+  LastModifiedDate	  "Wed Aug 22 14:40:14 2012"
+  RTWModifiedTimeStamp	  267545201
+  ModelVersionFormat	  "1.%<AutoIncrement:11>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -78,7 +78,6 @@ Model {
     $ObjectID		    2
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "unfinished_total"
-    signals_		    []
     overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
@@ -710,12 +709,6 @@ Model {
       SampleTime	      "-1"
     }
     Block {
-      BlockType		      Demux
-      Outputs		      "4"
-      DisplayOption	      "none"
-      BusSelectionMode	      off
-    }
-    Block {
       BlockType		      DiscreteIntegrator
       IntegratorMethod	      "Integration: Forward Euler"
       gainval		      "1.0"
@@ -738,15 +731,6 @@ Model {
       IgnoreLimit	      off
       StateMustResolveToSignalObject off
       RTWStateStorageClass    "Auto"
-    }
-    Block {
-      BlockType		      FromWorkspace
-      VariableName	      "simulink_input"
-      OutDataTypeStr	      "Inherit: auto"
-      SampleTime	      "-1"
-      Interpolate	      on
-      ZeroCross		      off
-      OutputAfterFinalValue   "Extrapolation"
     }
     Block {
       BlockType		      Gain
@@ -897,7 +881,7 @@ Model {
   }
   System {
     Name		    "unfinished_total"
-    Location		    [2, 75, 1918, 1139]
+    Location		    [2, 83, 1918, 1147]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -911,7 +895,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "159"
+    SIDHighWatermark	    "169"
     Block {
       BlockType		      Constant
       Name		      "Constant"
@@ -928,6 +912,29 @@ Model {
       ZOrder		      -5
     }
     Block {
+      BlockType		      Reference
+      Name		      "Discrete \nImpulse"
+      SID		      "166"
+      Ports		      [0, 1]
+      Position		      [270, 91, 310, 129]
+      LibraryVersion	      "1.725"
+      SourceBlock	      "dspsrcs4/Discrete \nImpulse"
+      SourceType	      "Discrete Impulse "
+      Delay		      "5"
+      SampleTime	      "1"
+      FrameSample	      "1"
+      additionalParams	      off
+      allowOverrides	      on
+      dataType		      "double"
+      isSigned		      on
+      wordLen		      "16"
+      udDataType	      "sfix(16)"
+      fracBitsMode	      "Best precision"
+      numFracBits	      "15"
+      OutDataTypeStr	      "double"
+      LastOutDataTypeStr      "double"
+    }
+    Block {
       BlockType		      Scope
       Name		      "Scope"
       SID		      "128"
@@ -935,7 +942,7 @@ Model {
       Position		      [865, 269, 895, 301]
       ZOrder		      -3
       Floating		      off
-      Location		      [188, 390, 858, 841]
+      Location		      [188, 390, 851, 841]
       Open		      off
       NumInputPorts	      "1"
       List {
@@ -964,7 +971,7 @@ Model {
       Position		      [865, 429, 895, 461]
       ZOrder		      -3
       Floating		      off
-      Location		      [188, 390, 674, 733]
+      Location		      [188, 390, 1284, 980]
       Open		      off
       NumInputPorts	      "1"
       ZoomMode		      "yonly"
@@ -990,112 +997,6 @@ Model {
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Signal Builder"
-      SID		      "155"
-      Tag		      "STV Subsys"
-      Ports		      [0, 1]
-      Position		      [230, 80, 315, 120]
-      ZOrder		      -20
-      CopyFcn		      "sigbuilder_block('copy');"
-      DeleteFcn		      "sigbuilder_block('delete');"
-      LoadFcn		      "sigbuilder_block('load');"
-      ModelCloseFcn	      "sigbuilder_block('modelClose');"
-      PreSaveFcn	      "sigbuilder_block('preSave');"
-      StartFcn		      "sigbuilder_block('start');"
-      PauseFcn		      "sigbuilder_block('pause');"
-      ContinueFcn	      "sigbuilder_block('continue');"
-      StopFcn		      "sigbuilder_block('stop');"
-      NameChangeFcn	      "sigbuilder_block('namechange');"
-      ClipboardFcn	      "sigbuilder_block('clipboard');"
-      OpenFcn		      "sigbuilder_block('open',[437.25 199.5 550.5 399.75 ]);"
-      CloseFcn		      "sigbuilder_block('close');"
-      MinAlgLoopOccurrences   off
-      PropExecContextOutsideSubsystem off
-      RTWSystemCode	      "Auto"
-      FunctionWithSeparateData off
-      Opaque		      off
-      RequestExecContextInheritance off
-      MaskHideContents	      on
-      MaskType		      "Sigbuilder block"
-      MaskDescription	      "Simulink:masks:SigbuilderBlock_MD"
-      MaskInitialization      "if ~strcmp(get_param(bdroot(gcbh),'SimulationStatus'),'stopped') tuvar = sigbuilder_blo"
-      "ck('maskInit'); end"
-      MaskSelfModifiable      on
-      MaskDisplay	      "plot(0, 0, 100, 100,[2, 2, 32, 32, 2], [68, 8, 8, 68, 68],[32, 2], [38, 38], [32, 19, 2],[53,"
-      " 60, 44], [32, 17, 17, 2],[16, 16, 31, 31]);txt = getActiveGroup(gcbh);text(2, 100, txt,'verticalAlignment', 'to"
-      "p');"
-      MaskIconFrame	      on
-      MaskIconOpaque	      off
-      MaskIconRotate	      "port"
-      MaskPortRotate	      "default"
-      MaskIconUnits	      "autoscale"
-      MaskCapabilities	      "slmaskedcaps(gcbh)"
-      System {
-	Name			"Signal Builder"
-	Location		[480, 85, 980, 386]
-	Open			off
-	ModelBrowserVisibility	off
-	ModelBrowserWidth	200
-	ScreenColor		"white"
-	PaperOrientation	"landscape"
-	PaperPositionMode	"auto"
-	PaperType		"A4"
-	PaperUnits		"centimeters"
-	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-	TiledPageScale		1
-	ShowPageBoundaries	off
-	ZoomFactor		"100"
-	SIDHighWatermark	"4"
-	Block {
-	  BlockType		  Demux
-	  Name			  "Demux"
-	  SID			  "155:1"
-	  Tag			  "STV Demux"
-	  Ports			  [1, 1]
-	  Position		  [150, 34, 160, 606]
-	  ZOrder		  -1
-	  Outputs		  "1"
-	}
-	Block {
-	  BlockType		  FromWorkspace
-	  Name			  "FromWs"
-	  SID			  "155:2"
-	  Tag			  "STV FromWs"
-	  Position		  [30, 300, 115, 350]
-	  ZOrder		  -2
-	  VariableName		  "tuvar"
-	  SampleTime		  "0"
-	  ZeroCross		  on
-	  SigBuilderData	  "DataTag0"
-	  VnvData		  "DataTag1"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "Signal 1"
-	  SID			  "155:3"
-	  Tag			  "STV Outport"
-	  Position		  [280, 30, 300, 40]
-	  ZOrder		  -3
-	  IconDisplay		  "Port number"
-	}
-	Line {
-	  SrcBlock		  "Demux"
-	  SrcPort		  1
-	  Points		  [50, 0; 0, -285]
-	  DstBlock		  "Signal 1"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "FromWs"
-	  SrcPort		  1
-	  Points		  [5, 0; 0, -5]
-	  DstBlock		  "Demux"
-	  DstPort		  1
-	}
-      }
-    }
-    Block {
-      BlockType		      SubSystem
       Name		      "Subsystem1"
       SID		      "113"
       Ports		      [8, 2]
@@ -1109,7 +1010,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Subsystem1"
-	Location		[10, 83, 950, 1114]
+	Location		[64, 83, 1918, 1171]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1132,7 +1033,7 @@ Model {
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "In2"
+	  Name			  "logical1"
 	  SID			  "115"
 	  Position		  [840, 28, 870, 42]
 	  BlockMirror		  on
@@ -1348,11 +1249,11 @@ Model {
 	Block {
 	  BlockType		  DiscreteIntegrator
 	  Name			  "Discrete-Time\nIntegrator1"
-	  SID			  "74"
+	  SID			  "160"
 	  Ports			  [1, 1]
-	  Position		  [340, 184, 375, 216]
-	  ZOrder		  -7
-	  IntegratorMethod	  "Accumulation: Forward Euler"
+	  Position		  [387, 320, 413, 350]
+	  ZOrder		  -10
+	  BlockRotation		  270
 	  ICPrevOutput		  "DiscIntNeverNeededParam"
 	  ICPrevScaledInput	  "DiscIntNeverNeededParam"
 	}
@@ -1737,6 +1638,68 @@ Model {
 	  SaturateOnIntegerOverflow off
 	}
 	Block {
+	  BlockType		  Scope
+	  Name			  "Scope"
+	  SID			  "168"
+	  Ports			  [1]
+	  Position		  [524, 155, 546, 175]
+	  ZOrder		  -3
+	  BlockRotation		  270
+	  Floating		  off
+	  Location		  [188, 390, 512, 629]
+	  Open			  off
+	  NumInputPorts		  "1"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    ScopeGraphics
+	    FigureColor		    "[0.5 0.5 0.5]"
+	    AxesColor		    "[0 0 0]"
+	    AxesTickColor	    "[1 1 1]"
+	    LineColors		    "[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	    LineStyles		    "-|-|-|-|-|-"
+	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
+	    MarkerStyles	    "none|none|none|none|none|none"
+	  }
+	  ShowLegends		  off
+	  SaveName		  "ScopeData2"
+	  DataFormat		  "StructureWithTime"
+	  SampleTime		  "0"
+	}
+	Block {
+	  BlockType		  Scope
+	  Name			  "Scope1"
+	  SID			  "169"
+	  Ports			  [1]
+	  Position		  [428, 155, 452, 180]
+	  ZOrder		  -3
+	  BlockRotation		  270
+	  Floating		  off
+	  Location		  [188, 390, 512, 629]
+	  Open			  on
+	  NumInputPorts		  "1"
+	  List {
+	    ListType		    AxesTitles
+	    axes1		    "%<SignalLabel>"
+	  }
+	  List {
+	    ListType		    ScopeGraphics
+	    FigureColor		    "[0.5 0.5 0.5]"
+	    AxesColor		    "[0 0 0]"
+	    AxesTickColor	    "[1 1 1]"
+	    LineColors		    "[1 1 0;1 0 1;0 1 1;1 0 0;0 1 0;0 0 1]"
+	    LineStyles		    "-|-|-|-|-|-"
+	    LineWidths		    "[0.5 0.5 0.5 0.5 0.5 0.5]"
+	    MarkerStyles	    "none|none|none|none|none|none"
+	  }
+	  ShowLegends		  off
+	  SaveName		  "ScopeData3"
+	  DataFormat		  "StructureWithTime"
+	  SampleTime		  "0"
+	}
+	Block {
 	  BlockType		  Sum
 	  Name			  "Sum"
 	  SID			  "10"
@@ -2020,6 +1983,18 @@ Model {
 	}
 	Block {
 	  BlockType		  UnitDelay
+	  Name			  "Unit Delay2"
+	  SID			  "161"
+	  Position		  [383, 225, 417, 260]
+	  ZOrder		  -18
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  InputProcessing	  "Elements as channels (sample based)"
+	  SampleTime		  "-1"
+	}
+	Block {
+	  BlockType		  UnitDelay
 	  Name			  "delay"
 	  SID			  "112"
 	  Position		  [670, 524, 690, 546]
@@ -2085,8 +2060,16 @@ Model {
 	Line {
 	  SrcBlock		  "Discrete-Time\nIntegrator"
 	  SrcPort		  1
-	  DstBlock		  "K_I"
-	  DstPort		  1
+	  Points		  [25, 0]
+	  Branch {
+	    DstBlock		    "K_I"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [0, -10]
+	    DstBlock		    "Scope"
+	    DstPort		    1
+	  }
 	}
 	Line {
 	  SrcBlock		  "Gyro Offset"
@@ -2210,12 +2193,6 @@ Model {
 	  DstPort		  2
 	}
 	Line {
-	  SrcBlock		  "Sum5"
-	  SrcPort		  1
-	  DstBlock		  "Discrete-Time\nIntegrator1"
-	  DstPort		  1
-	}
-	Line {
 	  SrcBlock		  "Sum7"
 	  SrcPort		  1
 	  Points		  [-200, 0; 0, -50]
@@ -2223,13 +2200,9 @@ Model {
 	  DstPort		  2
 	}
 	Line {
-	  SrcBlock		  "Discrete-Time\nIntegrator1"
+	  SrcBlock		  "Sum5"
 	  SrcPort		  1
-	  Points		  [20, 0]
-	  Branch {
-	    DstBlock		    "Sum7"
-	    DstPort		    1
-	  }
+	  Points		  [20, 0; 75, 0]
 	  Branch {
 	    Points		    [30, 0]
 	    Branch {
@@ -2238,30 +2211,20 @@ Model {
 	      DstPort		      1
 	    }
 	    Branch {
-	      DstBlock		      "Discrete-Time\nIntegrator"
-	      DstPort		      1
+	      Points		      [10, 0]
+	      Branch {
+		DstBlock		"Discrete-Time\nIntegrator"
+		DstPort			1
+	      }
+	      Branch {
+		DstBlock		"Scope1"
+		DstPort			1
+	      }
 	    }
 	  }
-	}
-	Line {
-	  SrcBlock		  "Sum4"
-	  SrcPort		  1
-	  Points		  [30, 0; 0, -40]
 	  Branch {
-	    DstBlock		    "Sum7"
-	    DstPort		    2
-	  }
-	  Branch {
-	    Points		    [0, 10; 75, 0]
-	    Branch {
-	      DstBlock		      "K_D"
-	      DstPort		      1
-	    }
-	    Branch {
-	      Points		      [0, 55]
-	      DstBlock		      "Product5"
-	      DstPort		      1
-	    }
+	    DstBlock		    "Unit Delay2"
+	    DstPort		    1
 	  }
 	}
 	Line {
@@ -2602,7 +2565,7 @@ Model {
 	  DstPort		  ifaction
 	}
 	Line {
-	  SrcBlock		  "In2"
+	  SrcBlock		  "logical1"
 	  SrcPort		  1
 	  DstBlock		  "If"
 	  DstPort		  1
@@ -2635,6 +2598,45 @@ Model {
 	  DstBlock		  "Product4"
 	  DstPort		  1
 	}
+	Line {
+	  SrcBlock		  "Sum4"
+	  SrcPort		  1
+	  Points		  [0, 15; 30, 0]
+	  Branch {
+	    DstBlock		    "Discrete-Time\nIntegrator1"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [135, 0]
+	    Branch {
+	      Points		      [0, -45]
+	      DstBlock		      "K_D"
+	      DstPort		      1
+	    }
+	    Branch {
+	      Points		      [0, 10]
+	      DstBlock		      "Product5"
+	      DstPort		      1
+	    }
+	  }
+	}
+	Line {
+	  SrcBlock		  "Discrete-Time\nIntegrator1"
+	  SrcPort		  1
+	  DstBlock		  "Sum7"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Unit Delay2"
+	  SrcPort		  1
+	  DstBlock		  "Sum7"
+	  DstPort		  1
+	}
+	Annotation {
+	  SID			  "167"
+	  Name			  "Regler"
+	  Position		  [590, 182]
+	}
       }
     }
     Line {
@@ -2660,15 +2662,30 @@ Model {
 	  DstPort		  4
 	}
 	Branch {
-	  Points		  [0, 120]
+	  Points		  [0, 35]
 	  Branch {
+	    Points		    [70, 0]
 	    DstBlock		    "Subsystem1"
-	    DstPort		    7
+	    DstPort		    5
 	  }
 	  Branch {
-	    Points		    [0, 40]
-	    DstBlock		    "Subsystem1"
-	    DstPort		    8
+	    Points		    [0, 45]
+	    Branch {
+	      Points		      [0, 40]
+	      Branch {
+		DstBlock		"Subsystem1"
+		DstPort			7
+	      }
+	      Branch {
+		Points			[0, 40]
+		DstBlock		"Subsystem1"
+		DstPort			8
+	      }
+	    }
+	    Branch {
+	      DstBlock		      "Subsystem1"
+	      DstPort		      6
+	    }
 	  }
 	}
       }
@@ -2679,9 +2696,9 @@ Model {
       }
     }
     Line {
-      SrcBlock		      "Signal Builder"
+      SrcBlock		      "Discrete \nImpulse"
       SrcPort		      1
-      Points		      [110, 0; 0, 120]
+      Points		      [30, 0; 0, 50; 85, 0; 0, 60]
       Branch {
 	Points			[0, 5]
 	DstBlock		"Subsystem1"
@@ -2693,105 +2710,5 @@ Model {
 	DstPort			3
       }
     }
-    Line {
-      SrcBlock		      "Constant1"
-      SrcPort		      1
-      Points		      [190, 0]
-      Branch {
-	DstBlock		"Subsystem1"
-	DstPort			5
-      }
-      Branch {
-	DstBlock		"Subsystem1"
-	DstPort			6
-      }
-    }
-  }
-}
-MatData {
-  NumRecords		  2
-  DataRecord {
-    Tag			    DataTag1
-    Data		    "  %)30     .    R ,   8    (     @         %    \"     $    !     0         %  0 $0    $   #,    =F5R:6"
-    "9Y0FQK4&%T:',   !V97)I9GE\";&M(86YD;&5S '9N=DUG<DED>           86-T:79E1W)O=7        !R97%$:7-P4')C;G0      &)L:T1"
-    "I<W!-;V1E        9W)O=7!#;G0           !G<F]U<%)E<4-N=        &=R;W5P1$]/4E-I9       ;6]D96Q(              !B;&]C:"
-    "T@              &]V97)I9&53971T:6YG<P        X    P    !@    @    &          4    (               !          D    "
-    "     #@   #     &    \"     8         !0    @               $         \"0         .    ,     8    (    !@         "
-    "%    \"                0         )          X    X    !@    @    &          4    (     0    $    !          D    ("
-    "            \\#\\.    ,     8    (    !@         %    \"                0         )          X    P    !@    @    "
-    "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
-    "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
-    "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"        \"  !)Y #@   #@    &    \"     8         !0    @    !     0    $         \"0    @   "
-    "    #@ .RD0 X    P    !@    @    &          4    (               !          D         "
-  }
-  DataRecord {
-    Tag			    DataTag0
-    Data		    "  %)30     .    P H   8    (     @         %    \"     $    !     0         %  0 %@    $   \"P    9W)I9"
-    "%-E='1I;F<              &-H86YN96QS                  !A>&5S                        8V]M;6]N                     &1"
-    "A=&%3970                   !D871A4V5T261X                :7-697)I9FEC871I;VY6:7-I8FQE '-B;V)J                     "
-    "  .    ,     8    (    !          %    \"     $    \"     0         0  ( ;VX   X   #@ @  !@    @    \"          4 "
-    "   (     0    $    !          4 !  *     0   %H   !S=&5P6       <W1E<%D      'E-:6X       !Y36%X        8V]L;W(   "
-    "   &QI;F53='EL90!L:6YE5VED=&@ ;&%B96P      &]U=$EN9&5X           .    .     8    (    !@         %    \"     $    "
-    "!     0         )    \"               #@   #@    &    \"     8         !0    @    !     0    $         \"0    @   "
-    "            X    X    !@    @    &          4    (     0    $    !          D    (            \\/\\.    .     8   "
-    " (    !@         %    \"     $    !     0         )    \"            /!_#@   $@    &    \"     8         !0    @  "
-    "  !     P    $         \"0   !@   !\"/NC9K/KJ/P                     .    ,     8    (    !          %    \"     $ "
-    "   !     0         0  $ +0    X    X    !@    @    &          4    (     0    $    !          D    (            ^#"
-    "\\.    .     8    (    !          %    \"     $    (     0         0    \"    %-I9VYA;\" Q#@   #@    &    \"     8"
-    "         !0    @    !     0    $         \"0    @           #P/PX   \"P 0  !@    @    \"          4    (     0    "
-    "$    !          4 !  +     0   #<   !C:&%N;F5L<P   'E,:6T         ;&%B96Q0;W,   !L86)E;$@      &QA8F5L4&%T8V@   X "
-    "   X    !@    @    &          4    (     0    $    !          D    (            \\#\\.    0     8    (    !@      "
-    "   %    \"     $    \"     0         )    $    'L4KD?A>H2_N!Z%ZU&XOC\\.    ,     8    (    !          %    \"     "
-    "$    \"     0         0  ( 5$P   X    X    !@    @    &          4    (     0    $    !          D    (        T \""
-    "2I4 .    .     8    (    !@         %    \"     $    !     0         )    \"        (  F*) #@   &@\"   &    \"    "
-    " (         !0    @    !     0    $         !0 $  X    !    8@   &1I<W!4:6UE        9&ES<$UO9&4       !M:6Y4:6UE   "
-    "      &UA>%1I;64         869T97)&:6YA;%-T<@!S86UP;&54:6UE     'IE<F]#<F]S<P              #@   $     &    \"     8 "
-    "        !0    @    !     @    $         \"0   !                       \"1 #@   #@    &    \"     8         !0    @"
-    "    !     0    $         \"0    @           #P/PX    X    !@    @    &          4    (     0    $    !          D "
-    "   (               .    .     8    (    !@         %    \"     $    !     0         )    \"            \"1 #@   $ "
-    "    &    \"     0         !0    @    !    \"P    $         $     L   !%>'1R87!O;&%T90      #@   #@    &    \"     "
-    "8         !0    @    !     0    $         \"0    @               X    P    !@    @    $          4    (     0    ("
-    "    !         !   @!O;@  #@   ( !   &    \"     (         !0    @    !     0    $         !0 $  X    !    .    &%C"
-    "=&EV941I<W!)9'@ =&EM95)A;F=E      !N86UE             &1I<W!L87E286YG90  #@   #@    &    \"     8         !0    @  "
-    "  !     0    $         \"0    @           #P/PX   !     !@    @    &          4    (     0    (    !          D   "
-    " 0                       D0 X    X    !@    @    $          4    (     0    <    !         !     '    1W)O=7 @,0 ."
-    "    0     8    (    !@         %    \"     $    \"     0         )    $                       )$ .    .     8    ("
-    "    !@         %    \"     $    !     0         )    \"            / _#@   #@    &    \"     8         !0    @    "
-    "!     0    $         \"0    @               X   \"     !@    @    1          $          0 $ $U#3U,!    \"    %-I9U"
-    "-U:71E#@   $@    &    \"     T         !0    @    &     0    $         !@   !@       #= @    $    !     0    ,    "
-    ".    H H   8    (    \"0         %    \"     $   !P\"@   0         \"    < H    !24T     #@   - )   &    \"     ( "
-    "        !0    @    !     0    $         !0 $  4    !    !0   $U#3U,     #@   (@)   &    \"    !$          0       "
-    "  !  0 34-/4P$    -    1FEL95=R87!P97)?7P    X   !(\"0  !@    @    !          4    (    \"0    $    !          X  "
-    "    @  !@    @    )          4    (    T $   $    !          (   #0 0   @    T   \"P    \\    /    !0 0  L $  - ! "
-    "            $=R;W5P<P!.86UE %-I9VYA;', 6$1A=&$ 641A=&$ 4VEG4W5I=&53:6=N86P 57-E<D1A=&$ 4VEG4W5I=&5'<F]U< !!8W1I=F5"
-    "3:6=N86P 4F5Q=6ER96UE;G1);F9O %1I;65286YG90!3:6=3=6ET90!!8W1I=F5'<F]U<                                     8      "
-    "              (                    #                                                P                    $    #   "
-    "  @                    (    \"     0                    ,    !               !     0    $    %     @    (    !    "
-    "      ,    !    !          #     @    $    !    !     $    \"    !0    $    #                                     "
-    "          .          X    X    !@    @    $          4    (     0    <    !         !     '    1W)O=7 @,0 .    .  "
-    "   8    (    !          %    \"     $    (     0         0    \"    %-I9VYA;\" Q#@   %     &    \"     8         !"
-    "0    @    !    !     $         \"0   \"                       !!         &$         D0 X   !0    !@    @    &     "
-    "     4    (     0    0    !          D    @              #A>A2N1^&Z/U*X'H7K4;@_           .    2     8    (    #0 "
-    "        %    \"     8    !     0         &    &        -T\"     0    $    #     0    X   !(    !@    @    -       "
-    "   4    (    !@    $    !          8    8        W0(    !     0    (    \"    #@   #@%   &    \"     $         !0 "
-    "   @    $     0    $         #@   #@    &    \"     (         !0    @    !          $         !0 $  $    !        "
-    "  X   !  0  !@    @    \"          4    (     0    $    !          4 !  )     0   \"0   !.86UE      !81&%T80    !9"
-    "1&%T80    !5<V5R1&%T80      #@   #     &    \"     0         !0    @               $         $          .    ,    "
-    " 8    (    !@         %    \"                0         )          X    P    !@    @    &          4    (          "
-    "     !          D         #@   #     &    \"     8         !0    @               $         \"0         .    $ (   "
-    "8    (     @         %    \"     $    !     0         %  0 $     $   !@    3F%M90               %-I9VYA;',        "
-    "   !!8W1I=F53:6=N86P     4F5Q=6ER96UE;G1);F9O %5S97)$871A          !4:6UE4F%N9V4         #@   #     &    \"     0 "
-    "        !0    @               $         $          .    2     8    (    #0         %    \"     4    !     0       "
-    "  &    %        -T\"               !          X    P    !@    @    &          4    (               !          D   "
-    "      #@   #     &    \"     0         !0    @               $         $          .    ,     8    (    !@         "
-    "%    \"                0         )          X   !     !@    @    &          4    (     0    (    !          D    0"
-    "                       D0 X   !H 0  !@    @    \"          4    (     0    $    !          4 !  ,     0   #    !.8"
-    "6UE          !'<F]U<',       !!8W1I=F5'<F]U< !5<V5R1&%T80     .    ,     8    (    !          %    \"             "
-    "   0         0          X   !(    !@    @    -          4    (    !0    $    !          8    4        W0(         "
-    "      (         #@   #@    &    \"     8         !0    @    !     0    $         \"0    @           #P/PX    P    "
-    "!@    @    &          4    (               !          D         #@   (@    &    \"     D         !0    @    !    6"
-    "     $          @   %@      4E-      X   !(    !@    @    \"          4    (     0    $    !          4 !  %     0"
-    "    4   !-0T]3      X         "
   }
 }
