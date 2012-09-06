@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.5"
+    ComputedModelVersion    "1.7"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -18,7 +18,7 @@ Model {
       Type		      "Cell"
       Dimension		      2
       Cell		      "HDLSubsystem"
-      Cell		      "State_controller_real_stabilized"
+      Cell		      "State_controller_real"
       PropName		      "mdlProps"
     }
   }
@@ -38,9 +38,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "dAN"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Aug 30 13:05:49 2012"
-  RTWModifiedTimeStamp	  268228022
-  ModelVersionFormat	  "1.%<AutoIncrement:5>"
+  LastModifiedDate	  "Wed Sep 05 02:22:20 2012"
+  RTWModifiedTimeStamp	  268712517
+  ModelVersionFormat	  "1.%<AutoIncrement:7>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -143,7 +143,7 @@ Model {
 	  $ObjectID		  4
 	  Version		  "1.12.0"
 	  StartTime		  "0.0"
-	  StopTime		  "100"
+	  StopTime		  "400"
 	  AbsTol		  "auto"
 	  FixedStep		  "auto"
 	  InitialStep		  "auto"
@@ -887,7 +887,7 @@ Model {
   }
   System {
     Name		    "State_controller_real"
-    Location		    [2, 74, 1918, 1019]
+    Location		    [-166, 106, 1547, 1137]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -901,7 +901,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "144"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "73"
+    SIDHighWatermark	    "77"
     Block {
       BlockType		      SubSystem
       Name		      "Controller"
@@ -918,7 +918,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Controller"
-	Location		[737, 99, 1395, 836]
+	Location		[735, 67, 1397, 857]
 	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -957,7 +957,7 @@ Model {
 	  ZOrder		  -4
 	  BlockMirror		  on
 	  NamePlacement		  "alternate"
-	  Value			  "[0;0.2467;0;10]"
+	  Value			  "[   0;0.1530\n;0;10.0000]"
 	  VectorParams1D	  off
 	}
 	Block {
@@ -1006,7 +1006,6 @@ Model {
 	  Position		  [270, 505, 300, 535]
 	  ZOrder		  -8
 	  BlockRotation		  270
-	  Gain			  "1*10^3"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
 	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
 	  SaturateOnIntegerOverflow off
@@ -1015,10 +1014,10 @@ Model {
 	  BlockType		  Constant
 	  Name			  "K"
 	  SID			  "5"
-	  Position		  [232, 560, 338, 660]
+	  Position		  [233, 560, 337, 670]
 	  ZOrder		  -4
 	  BlockRotation		  270
-	  Value			  "[ 20.5105 ;  20.5909 ;  -0.1581 ;   0.0488]"
+	  Value			  "[521.5086;73.4704;-0.0900; 0.7175\n]"
 	  VectorParams1D	  off
 	}
 	Block {
@@ -1154,8 +1153,8 @@ Model {
 	  ZOrder		  -10
 	  BlockRotation		  270
 	  InputPortMap		  "u0"
-	  UpperLimit		  "180"
-	  LowerLimit		  "-180"
+	  UpperLimit		  "1080"
+	  LowerLimit		  "-1080"
 	}
 	Block {
 	  BlockType		  Sum
@@ -1253,12 +1252,6 @@ Model {
 	  DstPort		  1
 	}
 	Line {
-	  SrcBlock		  "PI Controller"
-	  SrcPort		  1
-	  DstBlock		  "Sum1"
-	  DstPort		  2
-	}
-	Line {
 	  Labels		  [0, 0]
 	  SrcBlock		  "Saturation"
 	  SrcPort		  1
@@ -1275,15 +1268,9 @@ Model {
 	Line {
 	  SrcBlock		  "Stateinput"
 	  SrcPort		  1
-	  Points		  [0, 70; 50, 0]
-	  Branch {
-	    DstBlock		    "Dot Product"
-	    DstPort		    1
-	  }
-	  Branch {
-	    DstBlock		    "Dot Product1"
-	    DstPort		    2
-	  }
+	  Points		  [0, 70]
+	  DstBlock		  "Dot Product"
+	  DstPort		  1
 	}
 	Line {
 	  SrcBlock		  "phi_speed_soll"
@@ -1472,7 +1459,7 @@ Model {
       MaskHideContents	      off
       System {
 	Name			"Störsignalgenerator"
-	Location		[-25, 82, 1895, 1051]
+	Location		[-108, 236, 1812, 1205]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -1499,7 +1486,7 @@ Model {
 	  SID			  "24"
 	  Position		  [30, 28, 80, 132]
 	  ZOrder		  -4
-	  Value			  "[1;1;0.01;0.01]"
+	  Value			  "[1;1;0;0]"
 	  VectorParams1D	  off
 	}
 	Block {
@@ -1508,7 +1495,19 @@ Model {
 	  SID			  "25"
 	  Position		  [250, 190, 280, 220]
 	  ZOrder		  -8
-	  Gain			  "20"
+	  Gain			  "10"
+	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+	  SaturateOnIntegerOverflow off
+	}
+	Block {
+	  BlockType		  Gain
+	  Name			  "Gain2"
+	  SID			  "74"
+	  Position		  [355, 280, 385, 310]
+	  ZOrder		  -8
+	  BlockRotation		  270
+	  Gain			  "0.1"
 	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
 	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
 	  SaturateOnIntegerOverflow off
@@ -1517,12 +1516,12 @@ Model {
 	  BlockType		  UniformRandomNumber
 	  Name			  "Noise"
 	  SID			  "33"
-	  Position		  [444, 275, 476, 305]
+	  Position		  [354, 370, 386, 400]
 	  ZOrder		  -23
 	  BlockRotation		  270
 	  NamePlacement		  "alternate"
-	  Minimum		  "-[5;3;1;1]"
-	  Maximum		  "[5;3;1;1]"
+	  Minimum		  "-[3;2;0.01;0.01]"
+	  Maximum		  "[3;2;0.01;0.01]"
 	  SampleTime		  "0.1"
 	  VectorParams1D	  off
 	}
@@ -1661,7 +1660,7 @@ Model {
 	  Name			  "Sum3"
 	  SID			  "34"
 	  Ports			  [2, 1]
-	  Position		  [450, 195, 470, 215]
+	  Position		  [360, 195, 380, 215]
 	  ZOrder		  -18
 	  ShowName		  off
 	  IconShape		  "round"
@@ -1699,13 +1698,7 @@ Model {
 	Line {
 	  SrcBlock		  "Noise"
 	  SrcPort		  1
-	  DstBlock		  "Sum3"
-	  DstPort		  2
-	}
-	Line {
-	  SrcBlock		  "Sum3"
-	  SrcPort		  1
-	  DstBlock		  "Sum"
+	  DstBlock		  "Gain2"
 	  DstPort		  1
 	}
 	Line {
@@ -1724,6 +1717,18 @@ Model {
 	  SrcBlock		  "Gain1"
 	  SrcPort		  1
 	  DstBlock		  "Sum3"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Gain2"
+	  SrcPort		  1
+	  DstBlock		  "Sum3"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Sum3"
+	  SrcPort		  1
+	  DstBlock		  "Sum"
 	  DstPort		  1
 	}
       }
@@ -1753,8 +1758,8 @@ Model {
       }
       System {
 	Name			"System"
-	Location		[2, 82, 1918, 1027]
-	Open			off
+	Location		[-52, 126, 1868, 1023]
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1788,9 +1793,9 @@ Model {
 	  BlockType		  Constant
 	  Name			  "Constant"
 	  SID			  "6"
-	  Position		  [280, 13, 485, 127]
+	  Position		  [270, 23, 475, 137]
 	  ZOrder		  -4
-	  Value			  "[0,1,0,0;0.981,0,0,0.02;0,0,0,1;0,0,0,-10]"
+	  Value			  "[\n0 , 1.0000 ,0  , 0 ; 50.0170,0 , 0, 0.1530\n ; 0 , 0 , 0 , 1.0000; 0 , 0 , 0  ,-10.0000]"
 	  VectorParams1D	  off
 	}
 	Block {
@@ -1844,7 +1849,7 @@ Model {
 	Line {
 	  SrcBlock		  "Constant"
 	  SrcPort		  1
-	  Points		  [15, 0; 0, 135]
+	  Points		  [0, 125]
 	  DstBlock		  "Product"
 	  DstPort		  1
 	}
@@ -1883,7 +1888,7 @@ Model {
       ZOrder		      -3
       BlockMirror	      on
       Floating		      off
-      Location		      [1, 48, 1921, 1039]
+      Location		      [5, 48, 1925, 1039]
       Open		      off
       NumInputPorts	      "1"
       List {
@@ -1923,7 +1928,7 @@ Model {
       BlockMirror	      on
       NamePlacement	      "alternate"
       Floating		      off
-      Location		      [780, 340, 1104, 579]
+      Location		      [5, 49, 1925, 1159]
       Open		      off
       NumInputPorts	      "1"
       ZoomMode		      "yonly"
@@ -2026,8 +2031,8 @@ MatData {
     "&          4    (               !          D         #@   #@    &    \"     8         !0    @    !     0    $     "
     "    \"0    @           #P/PX    P    !@    @    &          4    (               !          D         #@   #     & "
     "   \"     8         !0    @               $         \"0         .    .     8    (    !@         %    \"     $    !"
-    "     0         )    \"        \"  !)Y #@   #@    &    \"     8         !0    @    !     0    $         \"0    @   "
-    "     @ $B>0 X    P    !@    @    &          4    (               !          D         "
+    "     0         )    \"         !  @A #@   #@    &    \"     8         !0    @    !     0    $         \"0    @    "
+    "     ( !,0 X    P    !@    @    &          4    (               !          D         "
   }
   DataRecord {
     Tag			    DataTag0
@@ -2047,8 +2052,8 @@ MatData {
     "$    !          4 !  +     0   #<   !C:&%N;F5L<P   'E,:6T         ;&%B96Q0;W,   !L86)E;$@      &QA8F5L4&%T8V@   X "
     "   X    !@    @    &          4    (     0    $    !          D    (            \\#\\.    0     8    (    !@      "
     "   %    \"     $    \"     0         )    $               FIF9F9F9\\3\\.    ,     8    (    !          %    \"    "
-    " $    \"     0         0  ( 5$P   X    X    !@    @    &          4    (     0    $    !          D    (        , "
-    "!6HT .    .     8    (    !@         %    \"     $    !     0         )    \"        #  5*- #@   &@\"   &    \"   "
+    " $    \"     0         0  ( 5$P   X    X    !@    @    &          4    (     0    $    !          D    (        P "
+    "#X@$ .    .     8    (    !@         %    \"     $    !     0         )    \"        ( %('9 #@   &@\"   &    \"   "
     "  (         !0    @    !     0    $         !0 $  X    !    8@   &1I<W!4:6UE        9&ES<$UO9&4       !M:6Y4:6UE  "
     "       &UA>%1I;64         869T97)&:6YA;%-T<@!S86UP;&54:6UE     'IE<F]#<F]S<P              #@   $     &    \"     8"
     "         !0    @    !     @    $         \"0   !                       \"1 #@   #@    &    \"     8         !0    "
@@ -2075,7 +2080,7 @@ MatData {
     "        ,    !    !          #     @    $    !    !     $    \"    !0    $    #                                   "
     "            .          X    X    !@    @    $          4    (     0    <    !         !     '    1W)O=7 @,0 .    ."
     "     8    (    !          %    \"     $    (     0         0    \"    %-I9VYA;\" Q#@   &     &    \"     8        "
-    " !0    @    !    !@    $         \"0   #               %*X'H7K4? _4K@>A>M1\\#\\         0         !         )$ .  "
+    " !0    @    !    !@    $         \"0   #               %*X'H7K4? _4K@>A>M1\\#_V*%R/PO7P/_8H7(_\"]? _        )$ .  "
     "  8     8    (    !@         %    \"     $    &     0         )    ,    'L4KD?A>G0_>Q2N1^%Z=#\\       #P/P       /"
     " _>Q2N1^%Z=#][%*Y'X7IT/PX   !(    !@    @    -          4    (    !@    $    !          8    8        W0(    !    "
     " 0    ,    !    #@   $@    &    \"     T         !0    @    &     0    $         !@   !@       #= @    $    !     "

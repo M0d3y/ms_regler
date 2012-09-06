@@ -6,7 +6,7 @@ Model {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.1"
+    ComputedModelVersion    "1.8"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -27,9 +27,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "dAN"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Aug 30 15:26:41 2012"
-  RTWModifiedTimeStamp	  268241075
-  ModelVersionFormat	  "1.%<AutoIncrement:1>"
+  LastModifiedDate	  "Thu Sep 06 13:27:34 2012"
+  RTWModifiedTimeStamp	  268837243
+  ModelVersionFormat	  "1.%<AutoIncrement:8>"
   ConfigurationManager	  "None"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -68,7 +68,7 @@ Model {
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "wip"
     signals_		    []
-    overrideMode_	    [0U]
+    overrideMode_	    [0.0]
     Array {
       Type		      "Cell"
       Dimension		      1
@@ -688,6 +688,40 @@ Model {
       PreserveConstantTs      off
     }
     Block {
+      BlockType		      DataStoreMemory
+      DataStoreName	      "A"
+      ReadBeforeWriteMsg      "none"
+      WriteAfterWriteMsg      "none"
+      WriteAfterReadMsg	      "none"
+      InitialValue	      "0"
+      StateMustResolveToSignalObject off
+      RTWStateStorageClass    "Auto"
+      VectorParams1D	      on
+      ShowAdditionalParam     off
+      OutMin		      "[]"
+      OutMax		      "[]"
+      OutDataTypeStr	      "Inherit: auto"
+      LockScale		      off
+      SignalType	      "auto"
+      Dimensions	      "-1"
+      DataLogging	      off
+      DataLoggingLimitDataPoints off
+      DataLoggingMaxPoints    "5000"
+      DataLoggingDecimateData off
+      DataLoggingDecimation   "2"
+      DataLoggingNameMode     "SignalName"
+    }
+    Block {
+      BlockType		      DataStoreRead
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
+      BlockType		      DataStoreWrite
+      DataStoreName	      "A"
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      DiscreteIntegrator
       IntegratorMethod	      "Integration: Forward Euler"
       gainval		      "1.0"
@@ -762,6 +796,30 @@ Model {
       LatchByDelayingOutsideSignal off
       LatchInputForFeedbackSignals off
       Interpolate	      on
+    }
+    Block {
+      BlockType		      Integrator
+      ExternalReset	      "none"
+      InitialConditionSource  "internal"
+      InitialCondition	      "0"
+      LimitOutput	      off
+      UpperSaturationLimit    "inf"
+      LowerSaturationLimit    "-inf"
+      ShowSaturationPort      off
+      ShowStatePort	      off
+      AbsoluteTolerance	      "auto"
+      IgnoreLimit	      off
+      ZeroCross		      on
+      ContinuousStateAttributes	"''"
+    }
+    Block {
+      BlockType		      Logic
+      Operator		      "AND"
+      Inputs		      "2"
+      IconShape		      "rectangular"
+      AllPortsSameDT	      on
+      OutDataTypeStr	      "Inherit: Logical (see Configuration Parameters: Optimization)"
+      SampleTime	      "-1"
     }
     Block {
       BlockType		      Outport
@@ -850,6 +908,14 @@ Model {
       SampleTime	      "-1"
     }
     Block {
+      BlockType		      ToFile
+      Filename		      "untitled.mat"
+      MatrixName	      "ans"
+      SaveFormat	      "Array"
+      Decimation	      "1"
+      SampleTime	      "-1"
+    }
+    Block {
       BlockType		      UnitDelay
       X0		      "0"
       InputProcessing	      "Inherited"
@@ -861,7 +927,7 @@ Model {
   }
   System {
     Name		    "wip"
-    Location		    [2, 74, 1918, 1019]
+    Location		    [15, 118, 1914, 671]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -875,59 +941,91 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "125"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "147"
+    SIDHighWatermark	    "362"
     Block {
-      BlockType		      Constant
-      Name		      "Constant"
-      SID		      "138"
-      Position		      [495, 485, 540, 565]
-      ZOrder		      -4
-      Value		      "[0;1;0;0]"
-      VectorParams1D	      off
+      BlockType		      Reference
+      Name		      "Acceleration Sensor"
+      SID		      "159"
+      Ports		      [0, 3]
+      Position		      [40, 230, 160, 290]
+      ZOrder		      -5
+      LibraryVersion	      "1.262"
+      SourceBlock	      "legonxtlib/Acceleration Sensor"
+      SourceType	      "LEGO MINDSTORMS NXT Acceleration Sensor"
+      portNumber	      "1"
+      sampleTime	      "0.1"
     }
     Block {
-      BlockType		      Constant
-      Name		      "Constant1"
-      SID		      "139"
-      Position		      [495, 158, 540, 232]
-      ZOrder		      -4
-      Value		      "[1;0;0;0]"
-      VectorParams1D	      off
+      BlockType		      Reference
+      Name		      "Compare\nTo Constant"
+      SID		      "310"
+      Ports		      [1, 1]
+      Position		      [580, 55, 640, 85]
+      ZOrder		      -5
+      LibraryVersion	      "1.260"
+      SourceBlock	      "simulink/Logic and Bit\nOperations/Compare\nTo Constant"
+      SourceType	      "Compare To Constant"
+      relop		      "<="
+      const		      "1000.0"
+      OutDataTypeStr	      "uint8"
+      ZeroCross		      on
     }
     Block {
-      BlockType		      Constant
-      Name		      "Constant2"
-      SID		      "143"
-      Position		      [870, 222, 910, 278]
+      BlockType		      DataStoreMemory
+      Name		      "Data Store\nMemory"
+      SID		      "262"
+      Position		      [40, 65, 108, 94]
       ZOrder		      -4
-      BlockMirror	      on
-      NamePlacement	      "alternate"
-      Value		      "[0;0;1;0]"
-      VectorParams1D	      off
+      ShowName		      off
+      DataStoreName	      "offset_flag"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
     }
     Block {
-      BlockType		      Constant
-      Name		      "Constant3"
-      SID		      "144"
-      Position		      [705, 455, 735, 525]
-      ZOrder		      -4
-      Value		      "[0;0;0;1]"
-      VectorParams1D	      off
+      BlockType		      DataStoreRead
+      Name		      "Data Store\nRead"
+      SID		      "338"
+      Ports		      [0, 1]
+      Position		      [315, 151, 380, 179]
+      ZOrder		      -5
+      DataStoreName	      "offset_flag"
     }
     Block {
-      BlockType		      Constant
-      Name		      "Constant4"
-      SID		      "147"
-      Position		      [1000, 400, 1030, 430]
-      ZOrder		      -4
-      Value		      "0"
+      BlockType		      Reference
+      Name		      "Gyro Sensor"
+      SID		      "160"
+      Ports		      [0, 1]
+      Position		      [40, 400, 160, 460]
+      ZOrder		      -5
+      LibraryVersion	      "1.262"
+      SourceBlock	      "legonxtlib/Gyro Sensor"
+      SourceType	      "LEGO MINDSTORMS NXT Gyro Sensor"
+      portNumber	      "1"
+      outputMode	      "Rotation rate (-360 - 360)"
+      offset		      "600"
+      sampleTime	      "0.1"
+    }
+    Block {
+      BlockType		      If
+      Name		      "If"
+      SID		      "337"
+      Ports		      [2, 1]
+      Position		      [560, 136, 660, 174]
+      ZOrder		      -15
+      NumInputs		      "2"
+      IfExpression	      "u1 >= 120000 & u2 == 0"
+      ShowElse		      off
     }
     Block {
       BlockType		      SubSystem
-      Name		      "Controller"
-      SID		      "120"
-      Ports		      [2, 1]
-      Position		      [1115, 234, 1235, 476]
+      Name		      "Set offset_flag = 0"
+      SID		      "311"
+      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+      Position		      [767, 35, 803, 105]
+      ZOrder		      -16
+      BlockRotation	      270
+      TreatAsAtomicUnit	      on
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -936,8 +1034,8 @@ Model {
       RequestExecContextInheritance off
       MaskHideContents	      off
       System {
-	Name			"Controller"
-	Location		[737, 99, 1395, 836]
+	Name			"Set offset_flag = 0"
+	Location		[340, 471, 840, 771]
 	Open			off
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
@@ -951,386 +1049,298 @@ Model {
 	ShowPageBoundaries	off
 	ZoomFactor		"100"
 	Block {
-	  BlockType		  Inport
-	  Name			  "Stateinput"
-	  SID			  "121"
-	  Position		  [66, 375, 84, 405]
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Inport
-	  Name			  "phi_speed_soll"
-	  SID			  "122"
-	  Position		  [55, 693, 85, 707]
-	  Port			  "2"
-	  IconDisplay		  "Port number"
+	  BlockType		  ActionPort
+	  Name			  "Action Port"
+	  SID			  "313"
+	  Position		  [170, 15, 229, 43]
+	  ZOrder		  -2
 	}
 	Block {
 	  BlockType		  Constant
-	  Name			  "B"
-	  SID			  "123"
-	  Position		  [510, 260, 575, 330]
+	  Name			  "Constant"
+	  SID			  "316"
+	  Position		  [115, 85, 145, 115]
 	  ZOrder		  -4
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  Value			  "[0;0.2467;0;10]"
-	  VectorParams1D	  off
+	  Value			  "0"
+	}
+	Block {
+	  BlockType		  DataStoreWrite
+	  Name			  "Data Store\nWrite"
+	  SID			  "315"
+	  Ports			  [1]
+	  Position		  [275, 88, 340, 112]
+	  ZOrder		  -6
+	  DataStoreName		  "offset_flag"
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Data Store\nWrite"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "Set offset_flag = 1"
+      SID		      "318"
+      Ports		      [0, 0, 0, 0, 0, 0, 0, 1]
+      Position		      [767, 120, 803, 190]
+      ZOrder		      -16
+      BlockRotation	      270
+      TreatAsAtomicUnit	      on
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"Set offset_flag = 1"
+	Location		[340, 471, 840, 771]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  ActionPort
+	  Name			  "Action Port"
+	  SID			  "319"
+	  Position		  [170, 15, 229, 43]
+	  ZOrder		  -2
+	  ActionType		  "then"
+	}
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "320"
+	  Position		  [115, 85, 145, 115]
+	  ZOrder		  -4
 	}
 	Block {
 	  BlockType		  Constant
 	  Name			  "Constant1"
-	  SID			  "124"
-	  Position		  [25, 503, 75, 607]
+	  SID			  "341"
+	  Position		  [115, 170, 145, 200]
 	  ZOrder		  -4
-	  Value			  "[0;0;0;1]"
-	  VectorParams1D	  off
+	  Value			  "-1"
 	}
 	Block {
-	  BlockType		  DotProduct
-	  Name			  "Dot Product"
-	  SID			  "125"
-	  Position		  [325, 472, 355, 503]
-	  ZOrder		  -9
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	}
-	Block {
-	  BlockType		  DotProduct
-	  Name			  "Dot Product1"
-	  SID			  "126"
-	  Position		  [102, 605, 133, 635]
-	  ZOrder		  -9
-	  BlockRotation		  270
-	  BlockMirror		  on
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	}
-	Block {
-	  BlockType		  Gain
-	  Name			  "Gain"
-	  SID			  "127"
-	  Position		  [410, 405, 440, 435]
-	  ZOrder		  -8
-	  BlockRotation		  270
-	  Gain			  "5"
-	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
-	  BlockType		  Gain
-	  Name			  "Gain2"
-	  SID			  "128"
-	  Position		  [270, 505, 300, 535]
-	  ZOrder		  -8
-	  BlockRotation		  270
-	  Gain			  "1*10^3"
-	  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
-	  BlockType		  Constant
-	  Name			  "K"
-	  SID			  "129"
-	  Position		  [232, 560, 338, 660]
-	  ZOrder		  -4
-	  BlockRotation		  270
-	  Value			  "[ 20.5105 ;  20.5909 ;  -0.1581 ;   0.0488]"
-	  VectorParams1D	  off
+	  BlockType		  DataStoreWrite
+	  Name			  "Data Store\nWrite"
+	  SID			  "321"
+	  Ports			  [1]
+	  Position		  [275, 88, 340, 112]
+	  ZOrder		  -6
+	  DataStoreName		  "offset_flag"
 	}
 	Block {
 	  BlockType		  Reference
-	  Name			  "PI Controller"
-	  SID			  "130"
+	  Name			  "LCD"
+	  SID			  "339"
+	  Ports			  [1]
+	  Position		  [250, 155, 370, 215]
+	  ZOrder		  -10
+	  LibraryVersion	  "1.262"
+	  SourceBlock		  "legonxtlib/LCD"
+	  SourceType		  "LEGO MINDSTORMS NXT LCD"
+	  slcdStr		  "ER_GYRO"
+	  slcdLine		  "2"
+	  slcdFormat		  "Decimal"
+	}
+	Line {
+	  SrcBlock		  "Constant"
+	  SrcPort		  1
+	  DstBlock		  "Data Store\nWrite"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Constant1"
+	  SrcPort		  1
+	  DstBlock		  "LCD"
+	  DstPort		  1
+	}
+      }
+    }
+    Block {
+      BlockType		      Reference
+      Name		      "Timer"
+      SID		      "309"
+      Ports		      [0, 1]
+      Position		      [305, 45, 390, 95]
+      ZOrder		      -5
+      LibraryVersion	      "1.262"
+      SourceBlock	      "legonxtlib/Timer"
+      SourceType	      "LEGO MINDSTORMS NXT Timer"
+      sampleTime	      "1"
+    }
+    Block {
+      BlockType		      DataStoreMemory
+      Name		      "gyro offset"
+      SID		      "261"
+      Position		      [40, 25, 108, 58]
+      ZOrder		      -4
+      ShowName		      off
+      DataStoreName	      "gyro_offset"
+      ReadBeforeWriteMsg      "warning"
+      WriteAfterWriteMsg      "warning"
+      WriteAfterReadMsg	      "warning"
+    }
+    Block {
+      BlockType		      SubSystem
+      Name		      "phi.get"
+      SID		      "347"
+      Ports		      [0, 1]
+      Position		      [55, 322, 145, 388]
+      NamePlacement	      "alternate"
+      MinAlgLoopOccurrences   off
+      PropExecContextOutsideSubsystem off
+      RTWSystemCode	      "Auto"
+      FunctionWithSeparateData off
+      Opaque		      off
+      RequestExecContextInheritance off
+      MaskHideContents	      off
+      System {
+	Name			"phi.get"
+	Location		[2, 83, 1918, 1147]
+	Open			off
+	ModelBrowserVisibility	off
+	ModelBrowserWidth	200
+	ScreenColor		"white"
+	PaperOrientation	"landscape"
+	PaperPositionMode	"auto"
+	PaperType		"A4"
+	PaperUnits		"centimeters"
+	TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+	TiledPageScale		1
+	ShowPageBoundaries	off
+	ZoomFactor		"100"
+	Block {
+	  BlockType		  Constant
+	  Name			  "Constant"
+	  SID			  "348"
+	  Position		  [360, 235, 390, 265]
+	  ZOrder		  -4
+	  BlockRotation		  270
+	  Value			  "2"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Encoder"
+	  SID			  "349"
 	  Ports			  [1, 1]
-	  Position		  [597, 620, 633, 660]
-	  ZOrder		  -6
+	  Position		  [190, 315, 250, 435]
+	  ZOrder		  -5
 	  BlockRotation		  270
 	  NamePlacement		  "alternate"
-	  LibraryVersion	  "1.260"
-	  SourceBlock		  "simulink/Continuous/PID Controller"
-	  SourceType		  "PID 1dof"
-	  Controller		  "PI"
-	  TimeDomain		  "Continuous-time"
-	  SampleTime		  "1"
-	  IntegratorMethod	  "Forward Euler"
-	  FilterMethod		  "Forward Euler"
-	  Form			  "Parallel"
-	  P			  "1"
-	  I			  "5"
-	  D			  "0"
-	  N			  "100"
-	  InitialConditionSource  "internal"
-	  InitialConditionForIntegrator	"0"
-	  InitialConditionForFilter "0"
-	  ExternalReset		  "none"
-	  IgnoreLimit		  off
-	  ZeroCross		  on
-	  LimitOutput		  off
-	  UpperSaturationLimit	  "inf"
-	  LowerSaturationLimit	  "-inf"
-	  LinearizeAsGain	  off
-	  AntiWindupMode	  "none"
-	  Kb			  "1"
-	  TrackingMode		  off
-	  Kt			  "1"
-	  RndMeth		  "Floor"
-	  SaturateOnIntegerOverflow off
-	  LockScale		  off
-	  PParamMin		  "[]"
-	  PParamMax		  "[]"
-	  PParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  IParamMin		  "[]"
-	  IParamMax		  "[]"
-	  IParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  DParamMin		  "[]"
-	  DParamMax		  "[]"
-	  DParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  NParamMin		  "[]"
-	  NParamMax		  "[]"
-	  NParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  KbParamMin		  "[]"
-	  KbParamMax		  "[]"
-	  KbParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  KtParamMin		  "[]"
-	  KtParamMax		  "[]"
-	  KtParamDataTypeStr	  "Inherit: Inherit via internal rule"
-	  POutMin		  "[]"
-	  POutMax		  "[]"
-	  POutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  IOutMin		  "[]"
-	  IOutMax		  "[]"
-	  IOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  DOutMin		  "[]"
-	  DOutMax		  "[]"
-	  DOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  NOutMin		  "[]"
-	  NOutMax		  "[]"
-	  NOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  KbOutMin		  "[]"
-	  KbOutMax		  "[]"
-	  KbOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  KtOutMin		  "[]"
-	  KtOutMax		  "[]"
-	  KtOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  IntegratorOutMin	  "[]"
-	  IntegratorOutMax	  "[]"
-	  IntegratorOutDataTypeStr "Inherit: Inherit via internal rule"
-	  FilterOutMin		  "[]"
-	  FilterOutMax		  "[]"
-	  FilterOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumOutMin		  "[]"
-	  SumOutMax		  "[]"
-	  SumOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumI1OutMin		  "[]"
-	  SumI1OutMax		  "[]"
-	  SumI1OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumI2OutMin		  "[]"
-	  SumI2OutMax		  "[]"
-	  SumI2OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumI3OutMin		  "[]"
-	  SumI3OutMax		  "[]"
-	  SumI3OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumDOutMin		  "[]"
-	  SumDOutMax		  "[]"
-	  SumDOutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumAccumDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumI1AccumDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumI2AccumDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumI3AccumDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SumDAccumDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturationOutMin	  "[]"
-	  SaturationOutMax	  "[]"
-	  SaturationOutDataTypeStr "Inherit: Same as input"
-	  IntegratorContinuousStateAttributes "''"
-	  IntegratorStateMustResolveToSignalObject off
-	  IntegratorRTWStateStorageClass "Auto"
-	  FilterContinuousStateAttributes "''"
-	  FilterStateMustResolveToSignalObject off
-	  FilterRTWStateStorageClass "Auto"
+	  LibraryVersion	  "1.262"
+	  SourceBlock		  "legonxtlib/Encoder"
+	  SourceType		  "LEGO MINDSTORMS NXT Encoder"
+	  portNumber		  "A"
+	  opMode		  "Reset by external signal"
+	  sampleTime		  "0.1"
+	}
+	Block {
+	  BlockType		  Reference
+	  Name			  "Encoder1"
+	  SID			  "350"
+	  Ports			  [1, 1]
+	  Position		  [255, 315, 315, 435]
+	  ZOrder		  -5
+	  BlockRotation		  270
+	  LibraryVersion	  "1.262"
+	  SourceBlock		  "legonxtlib/Encoder"
+	  SourceType		  "LEGO MINDSTORMS NXT Encoder"
+	  portNumber		  "C"
+	  opMode		  "Reset by external signal"
+	  sampleTime		  "0.1"
 	}
 	Block {
 	  BlockType		  Product
-	  Name			  "Product1"
-	  SID			  "131"
+	  Name			  "Product"
+	  SID			  "351"
 	  Ports			  [2, 1]
-	  Position		  [360, 287, 390, 318]
+	  Position		  [242, 165, 273, 195]
 	  ZOrder		  -13
-	  BlockMirror		  on
-	  NamePlacement		  "alternate"
-	  InputSameDT		  off
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
-	  BlockType		  Saturate
-	  Name			  "Saturation"
-	  SID			  "132"
-	  Ports			  [1, 1]
-	  Position		  [410, 345, 440, 375]
-	  ZOrder		  -10
 	  BlockRotation		  270
-	  InputPortMap		  "u0"
-	  UpperLimit		  "180"
-	  LowerLimit		  "-180"
-	}
-	Block {
-	  BlockType		  Sum
-	  Name			  "Sum1"
-	  SID			  "133"
-	  Ports			  [2, 1]
-	  Position		  [605, 480, 625, 500]
-	  ZOrder		  -18
-	  BlockRotation		  270
-	  ShowName		  off
-	  IconShape		  "round"
-	  Inputs		  "-+|"
+	  Inputs		  "*/"
 	  InputSameDT		  off
 	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
 	  SaturateOnIntegerOverflow off
 	}
 	Block {
 	  BlockType		  Sum
-	  Name			  "Sum2"
-	  SID			  "134"
+	  Name			  "Sum"
+	  SID			  "352"
 	  Ports			  [2, 1]
-	  Position		  [110, 690, 130, 710]
+	  Position		  [240, 240, 260, 260]
 	  ZOrder		  -18
+	  BlockRotation		  270
 	  ShowName		  off
 	  IconShape		  "round"
-	  Inputs		  "-+|"
+	  Inputs		  "+|+"
 	  InputSameDT		  off
 	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
 	  SaturateOnIntegerOverflow off
 	}
 	Block {
 	  BlockType		  Outport
-	  Name			  "Stellgröße(phi_speed)"
-	  SID			  "135"
-	  Position		  [185, 298, 215, 312]
-	  BlockMirror		  on
+	  Name			  "phi.get"
+	  SID			  "353"
+	  Position		  [245, 90, 275, 105]
+	  BlockRotation		  270
 	  IconDisplay		  "Port number"
 	}
 	Line {
-	  SrcBlock		  "phi_speed_soll"
+	  SrcBlock		  "Sum"
 	  SrcPort		  1
-	  DstBlock		  "Sum2"
+	  DstBlock		  "Product"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Product"
+	  SrcPort		  1
+	  DstBlock		  "phi.get"
+	  DstPort		  1
+	}
+	Line {
+	  SrcBlock		  "Encoder1"
+	  SrcPort		  1
+	  Points		  [0, -60]
+	  DstBlock		  "Sum"
 	  DstPort		  2
 	}
 	Line {
-	  SrcBlock		  "Stateinput"
+	  SrcBlock		  "Encoder"
 	  SrcPort		  1
-	  Points		  [0, 70; 50, 0]
-	  Branch {
-	    DstBlock		    "Dot Product1"
-	    DstPort		    2
-	  }
-	  Branch {
-	    DstBlock		    "Dot Product"
-	    DstPort		    1
-	  }
-	}
-	Line {
-	  SrcBlock		  "Product1"
-	  SrcPort		  1
-	  DstBlock		  "Stellgröße(phi_speed)"
+	  Points		  [0, -60]
+	  DstBlock		  "Sum"
 	  DstPort		  1
 	}
 	Line {
-	  Labels		  [0, 0]
-	  SrcBlock		  "Saturation"
+	  SrcBlock		  "Constant"
 	  SrcPort		  1
-	  Points		  [0, -30]
-	  DstBlock		  "Product1"
+	  Points		  [0, -15; -110, 0]
+	  DstBlock		  "Product"
 	  DstPort		  2
-	}
-	Line {
-	  SrcBlock		  "PI Controller"
-	  SrcPort		  1
-	  DstBlock		  "Sum1"
-	  DstPort		  2
-	}
-	Line {
-	  SrcBlock		  "Constant1"
-	  SrcPort		  1
-	  Points		  [30, 0]
-	  DstBlock		  "Dot Product1"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Gain2"
-	  SrcPort		  1
-	  Points		  [0, -5]
-	  DstBlock		  "Dot Product"
-	  DstPort		  2
-	}
-	Line {
-	  SrcBlock		  "Dot Product1"
-	  SrcPort		  1
-	  DstBlock		  "Sum2"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Gain"
-	  SrcPort		  1
-	  DstBlock		  "Saturation"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Sum2"
-	  SrcPort		  1
-	  Points		  [480, 0]
-	  DstBlock		  "PI Controller"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Sum1"
-	  SrcPort		  1
-	  Points		  [-190, 0]
-	  DstBlock		  "Gain"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Dot Product"
-	  SrcPort		  1
-	  DstBlock		  "Sum1"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "B"
-	  SrcPort		  1
-	  DstBlock		  "Product1"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "K"
-	  SrcPort		  1
-	  DstBlock		  "Gain2"
-	  DstPort		  1
 	}
       }
     }
     Block {
-      BlockType		      DiscreteIntegrator
-      Name		      "Discrete-Time\nIntegrator"
-      SID		      "141"
-      Ports		      [1, 1]
-      Position		      [759, 195, 791, 230]
-      ZOrder		      -10
-      BlockRotation	      270
-      BlockMirror	      on
-      NamePlacement	      "alternate"
-      ICPrevOutput	      "DiscIntNeverNeededParam"
-      ICPrevScaledInput	      "DiscIntNeverNeededParam"
-    }
-    Block {
       BlockType		      SubSystem
-      Name		      "Magic_0.1"
-      SID		      "112"
-      Ports		      [2, 2]
-      Position		      [375, 266, 540, 444]
+      Name		      "system_total"
+      SID		      "306"
+      Ports		      [3]
+      Position		      [930, 242, 1200, 468]
       MinAlgLoopOccurrences   off
       PropExecContextOutsideSubsystem off
       RTWSystemCode	      "Auto"
@@ -1339,9 +1349,9 @@ Model {
       RequestExecContextInheritance off
       MaskHideContents	      off
       System {
-	Name			"Magic_0.1"
-	Location		[87, 239, 822, 662]
-	Open			off
+	Name			"system_total"
+	Location		[2, 83, 1918, 1147]
+	Open			on
 	ModelBrowserVisibility	off
 	ModelBrowserWidth	200
 	ScreenColor		"white"
@@ -1355,35 +1365,34 @@ Model {
 	ZoomFactor		"100"
 	Block {
 	  BlockType		  Inport
-	  Name			  "theta_in"
-	  SID			  "113"
-	  Position		  [25, 58, 55, 72]
+	  Name			  "z"
+	  SID			  "307"
+	  Position		  [50, 248, 80, 262]
 	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  Inport
-	  Name			  "theta_speed_in"
-	  SID			  "115"
-	  Position		  [25, 298, 55, 312]
+	  Name			  "phi"
+	  SID			  "356"
+	  Position		  [40, 368, 70, 382]
+	  ZOrder		  -1
 	  Port			  "2"
 	  IconDisplay		  "Port number"
 	}
 	Block {
-	  BlockType		  DiscreteIntegrator
-	  Name			  "Discrete-Time\nIntegrator"
-	  SID			  "111"
-	  Ports			  [1, 1]
-	  Position		  [375, 289, 410, 321]
-	  ZOrder		  -10
-	  ICPrevOutput		  "DiscIntNeverNeededParam"
-	  ICPrevScaledInput	  "DiscIntNeverNeededParam"
+	  BlockType		  Inport
+	  Name			  "gyro"
+	  SID			  "308"
+	  Position		  [40, 428, 70, 442]
+	  Port			  "3"
+	  IconDisplay		  "Port number"
 	}
 	Block {
 	  BlockType		  SubSystem
-	  Name			  "Subsystem"
-	  SID			  "35"
-	  Ports			  [1, 1]
-	  Position		  [125, 263, 315, 347]
+	  Name			  "Control_total"
+	  SID			  "327"
+	  Ports			  [5, 0, 0, 0, 0, 0, 0, 1]
+	  Position		  [1105, 170, 1350, 460]
 	  MinAlgLoopOccurrences	  off
 	  PropExecContextOutsideSubsystem off
 	  RTWSystemCode		  "Auto"
@@ -1392,8 +1401,1793 @@ Model {
 	  RequestExecContextInheritance	off
 	  MaskHideContents	  off
 	  System {
-	    Name		    "Subsystem"
-	    Location		    [2, 82, 1918, 1027]
+	    Name		    "Control_total"
+	    Location		    [567, 276, 1716, 864]
+	    Open		    off
+	    ModelBrowserVisibility  off
+	    ModelBrowserWidth	    200
+	    ScreenColor		    "white"
+	    PaperOrientation	    "landscape"
+	    PaperPositionMode	    "auto"
+	    PaperType		    "A4"
+	    PaperUnits		    "centimeters"
+	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+	    TiledPageScale	    1
+	    ShowPageBoundaries	    off
+	    ZoomFactor		    "100"
+	    Block {
+	      BlockType		      Inport
+	      Name		      "phi_speed_soll"
+	      SID		      "328"
+	      Position		      [1090, 28, 1120, 42]
+	      BlockMirror	      on
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "z_in"
+	      SID		      "329"
+	      Position		      [25, 178, 55, 192]
+	      Port		      "2"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "steervalue"
+	      SID		      "330"
+	      Position		      [825, 240, 855, 255]
+	      BlockRotation	      270
+	      BlockMirror	      on
+	      NamePlacement	      "alternate"
+	      Port		      "3"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "phi"
+	      SID		      "354"
+	      Position		      [25, 413, 55, 427]
+	      ZOrder		      -1
+	      Port		      "4"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      Inport
+	      Name		      "theta_speed_in"
+	      SID		      "331"
+	      Position		      [25, 268, 55, 282]
+	      Port		      "5"
+	      IconDisplay	      "Port number"
+	    }
+	    Block {
+	      BlockType		      ActionPort
+	      Name		      "Only activate, when Gyrooffset is calculated!"
+	      SID		      "332"
+	      Position		      [90, 30, 149, 58]
+	      ZOrder		      -2
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Controller"
+	      SID		      "120"
+	      Ports		      [2, 1]
+	      Position		      [774, 60, 1016, 180]
+	      BlockRotation	      270
+	      BlockMirror	      on
+	      NamePlacement	      "alternate"
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"Controller"
+		Location		[737, 99, 1395, 836]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "Stateinput"
+		  SID			  "121"
+		  Position		  [66, 405, 84, 435]
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "phi_speed_soll"
+		  SID			  "122"
+		  Position		  [55, 693, 85, 707]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  DotProduct
+		  Name			  "Dot Product"
+		  SID			  "125"
+		  Position		  [325, 472, 355, 503]
+		  ZOrder		  -9
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		}
+		Block {
+		  BlockType		  Gain
+		  Name			  "Gain"
+		  SID			  "127"
+		  Position		  [410, 405, 440, 435]
+		  ZOrder		  -8
+		  BlockRotation		  270
+		  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Gain
+		  Name			  "Gain2"
+		  SID			  "128"
+		  Position		  [270, 505, 300, 535]
+		  ZOrder		  -8
+		  BlockRotation		  270
+		  ParamDataTypeStr	  "Inherit: Inherit via internal rule"
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "K"
+		  SID			  "129"
+		  Position		  [232, 560, 338, 660]
+		  ZOrder		  -4
+		  BlockRotation		  270
+		  Value			  "[521.5086;73.4704;-0.0900; 0.7175]"
+		  VectorParams1D	  off
+		}
+		Block {
+		  BlockType		  Saturate
+		  Name			  "Saturation"
+		  SID			  "132"
+		  Ports			  [1, 1]
+		  Position		  [410, 320, 440, 350]
+		  ZOrder		  -10
+		  BlockRotation		  270
+		  InputPortMap		  "u0"
+		  UpperLimit		  "960"
+		  LowerLimit		  "-960"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum1"
+		  SID			  "133"
+		  Ports			  [2, 1]
+		  Position		  [605, 480, 625, 500]
+		  ZOrder		  -18
+		  BlockRotation		  270
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "-+|"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "u(phi_speed)"
+		  SID			  "135"
+		  Position		  [185, 298, 215, 312]
+		  BlockMirror		  on
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Stateinput"
+		  SrcPort		  1
+		  Points		  [0, 40]
+		  DstBlock		  "Dot Product"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Gain2"
+		  SrcPort		  1
+		  Points		  [0, -5]
+		  DstBlock		  "Dot Product"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Gain"
+		  SrcPort		  1
+		  DstBlock		  "Saturation"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Sum1"
+		  SrcPort		  1
+		  Points		  [-190, 0]
+		  DstBlock		  "Gain"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Dot Product"
+		  SrcPort		  1
+		  DstBlock		  "Sum1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "K"
+		  SrcPort		  1
+		  DstBlock		  "Gain2"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Saturation"
+		  SrcPort		  1
+		  Points		  [0, -10]
+		  DstBlock		  "u(phi_speed)"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "phi_speed_soll"
+		  SrcPort		  1
+		  Points		  [525, 0]
+		  DstBlock		  "Sum1"
+		  DstPort		  2
+		}
+		Annotation {
+		  SID			  "275"
+		  Name			  "todo:\nget integrating Servo controller working"
+		  Position		  [98, 20]
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "Magic_0.1"
+	      SID		      "112"
+	      Ports		      [2, 2]
+	      Position		      [90, 141, 255, 319]
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"Magic_0.1"
+		Location		[2, 83, 1918, 1147]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "z_in"
+		  SID			  "113"
+		  Position		  [25, 58, 55, 72]
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "theta_speed_in"
+		  SID			  "115"
+		  Position		  [375, 383, 405, 397]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  DiscreteIntegrator
+		  Name			  "Discrete-Time\nIntegrator"
+		  SID			  "111"
+		  Ports			  [1, 1]
+		  Position		  [375, 289, 410, 321]
+		  ZOrder		  -10
+		  ICPrevOutput		  "DiscIntNeverNeededParam"
+		  ICPrevScaledInput	  "DiscIntNeverNeededParam"
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  SID			  "110"
+		  Ports			  [2, 1]
+		  Position		  [455, 295, 475, 315]
+		  ZOrder		  -18
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "|-+"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "Umrechnungsfaktor"
+		  SID			  "10"
+		  Ports			  [1, 1]
+		  Position		  [125, 25, 315, 105]
+		  MinAlgLoopOccurrences	  off
+		  PropExecContextOutsideSubsystem off
+		  RTWSystemCode		  "Auto"
+		  FunctionWithSeparateData off
+		  Opaque		  off
+		  RequestExecContextInheritance	off
+		  MaskHideContents	  off
+		  System {
+		    Name		    "Umrechnungsfaktor"
+		    Location		    [277, 275, 572, 415]
+		    Open		    off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "A4"
+		    PaperUnits		    "centimeters"
+		    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "Z"
+		    SID			    "11"
+		    Position		    [25, 28, 55, 42]
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant"
+		    SID			    "7"
+		    Position		    [75, 85, 105, 115]
+		    ZOrder		    -4
+		    BlockRotation	    270
+		    NamePlacement	    "alternate"
+		    Value		    "-0.18"
+		    }
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant1"
+		    SID			    "8"
+		    Position		    [122, 85, 188, 115]
+		    ZOrder		    -4
+		    BlockRotation	    270
+		    Value		    "-5.78862"
+		    }
+		    Block {
+		    BlockType		    Product
+		    Name		    "Product"
+		    SID			    "6"
+		    Ports		    [2, 1]
+		    Position		    [185, 27, 215, 58]
+		    ZOrder		    -13
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    }
+		    Block {
+		    BlockType		    Sum
+		    Name		    "Sum"
+		    SID			    "5"
+		    Ports		    [2, 1]
+		    Position		    [80, 25, 100, 45]
+		    ZOrder		    -18
+		    ShowName		    off
+		    IconShape		    "round"
+		    Inputs		    "|+-"
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    }
+		    Block {
+		    BlockType		    Outport
+		    Name		    "theta"
+		    SID			    "12"
+		    Position		    [250, 38, 280, 52]
+		    IconDisplay		    "Port number"
+		    }
+		    Line {
+		    SrcBlock		    "Constant"
+		    SrcPort		    1
+		    DstBlock		    "Sum"
+		    DstPort		    2
+		    }
+		    Line {
+		    SrcBlock		    "Sum"
+		    SrcPort		    1
+		    DstBlock		    "Product"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "Constant1"
+		    SrcPort		    1
+		    Points		    [0, -30]
+		    DstBlock		    "Product"
+		    DstPort		    2
+		    }
+		    Line {
+		    SrcBlock		    "Z"
+		    SrcPort		    1
+		    DstBlock		    "Sum"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "Product"
+		    SrcPort		    1
+		    DstBlock		    "theta"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "complement filter"
+		  SID			  "18"
+		  Ports			  [2, 1]
+		  Position		  [510, 45, 655, 120]
+		  MinAlgLoopOccurrences	  off
+		  PropExecContextOutsideSubsystem off
+		  RTWSystemCode		  "Auto"
+		  FunctionWithSeparateData off
+		  Opaque		  off
+		  RequestExecContextInheritance	off
+		  MaskHideContents	  off
+		  System {
+		    Name		    "complement filter"
+		    Location		    [357, 201, 650, 409]
+		    Open		    off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "A4"
+		    PaperUnits		    "centimeters"
+		    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "theta_acc"
+		    SID			    "19"
+		    Position		    [25, 28, 55, 42]
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Inport
+		    Name		    "theta_speed_gyro"
+		    SID			    "21"
+		    Position		    [25, 178, 55, 192]
+		    Port		    "2"
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant"
+		    SID			    "13"
+		    Position		    [80, 65, 110, 95]
+		    ZOrder		    -4
+		    Value		    "0.02"
+		    }
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant1"
+		    SID			    "14"
+		    Position		    [80, 115, 110, 145]
+		    ZOrder		    -4
+		    Value		    "0.98"
+		    }
+		    Block {
+		    BlockType		    DiscreteIntegrator
+		    Name		    "Discrete-Time\nIntegrator"
+		    SID			    "22"
+		    Ports		    [1, 1]
+		    Position		    [105, 169, 140, 201]
+		    ZOrder		    -10
+		    ICPrevOutput	    "DiscIntNeverNeededParam"
+		    ICPrevScaledInput	    "DiscIntNeverNeededParam"
+		    }
+		    Block {
+		    BlockType		    Product
+		    Name		    "Product"
+		    SID			    "15"
+		    Ports		    [2, 1]
+		    Position		    [175, 147, 205, 178]
+		    ZOrder		    -13
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    }
+		    Block {
+		    BlockType		    Product
+		    Name		    "Product1"
+		    SID			    "9"
+		    Ports		    [2, 1]
+		    Position		    [155, 27, 185, 58]
+		    ZOrder		    -13
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    }
+		    Block {
+		    BlockType		    Sum
+		    Name		    "Sum"
+		    SID			    "16"
+		    Ports		    [2, 1]
+		    Position		    [210, 85, 230, 105]
+		    ZOrder		    -18
+		    ShowName		    off
+		    IconShape		    "round"
+		    Inputs		    "+|+"
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    }
+		    Block {
+		    BlockType		    Outport
+		    Name		    "theta_filter"
+		    SID			    "20"
+		    Position		    [255, 88, 285, 102]
+		    IconDisplay		    "Port number"
+		    }
+		    Line {
+		    SrcBlock		    "Product1"
+		    SrcPort		    1
+		    Points		    [30, 0]
+		    DstBlock		    "Sum"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "Product"
+		    SrcPort		    1
+		    Points		    [10, 0]
+		    DstBlock		    "Sum"
+		    DstPort		    2
+		    }
+		    Line {
+		    SrcBlock		    "Constant"
+		    SrcPort		    1
+		    Points		    [0, -30]
+		    DstBlock		    "Product1"
+		    DstPort		    2
+		    }
+		    Line {
+		    SrcBlock		    "Constant1"
+		    SrcPort		    1
+		    Points		    [10, 0; 0, 25]
+		    DstBlock		    "Product"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "Discrete-Time\nIntegrator"
+		    SrcPort		    1
+		    Points		    [0, -15]
+		    DstBlock		    "Product"
+		    DstPort		    2
+		    }
+		    Line {
+		    SrcBlock		    "theta_acc"
+		    SrcPort		    1
+		    DstBlock		    "Product1"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "Sum"
+		    SrcPort		    1
+		    DstBlock		    "theta_filter"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "theta_speed_gyro"
+		    SrcPort		    1
+		    DstBlock		    "Discrete-Time\nIntegrator"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  DataStoreRead
+		  Name			  "gyro offset"
+		  SID			  "260"
+		  Ports			  [0, 1]
+		  Position		  [225, 289, 315, 321]
+		  ZOrder		  -5
+		  DataStoreName		  "gyro_offset"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "theta"
+		  SID			  "114"
+		  Position		  [680, 78, 710, 92]
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "theta_speed"
+		  SID			  "116"
+		  Position		  [680, 298, 710, 312]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Umrechnungsfaktor"
+		  SrcPort		  1
+		  DstBlock		  "complement filter"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "gyro offset"
+		  SrcPort		  1
+		  DstBlock		  "Discrete-Time\nIntegrator"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, -5]
+		  Branch {
+		    DstBlock		    "complement filter"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [0, 5]
+		    DstBlock		    "theta_speed"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "Discrete-Time\nIntegrator"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "z_in"
+		  SrcPort		  1
+		  DstBlock		  "Umrechnungsfaktor"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "complement filter"
+		  SrcPort		  1
+		  DstBlock		  "theta"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "theta_speed_in"
+		  SrcPort		  1
+		  Points		  [55, 0]
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "state.get"
+	      SID		      "152"
+	      Ports		      [3, 1]
+	      Position		      [346, 60, 494, 160]
+	      BlockRotation	      270
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"state.get"
+		Location		[2, 75, 1918, 1139]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"125"
+		Block {
+		  BlockType		  Inport
+		  Name			  "theta"
+		  SID			  "153"
+		  Position		  [550, 473, 580, 487]
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "theta_speed"
+		  SID			  "156"
+		  Position		  [550, 563, 580, 577]
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "phi"
+		  SID			  "154"
+		  Position		  [975, 518, 1005, 532]
+		  BlockMirror		  on
+		  Port			  "3"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  SID			  "138"
+		  Position		  [600, 650, 645, 730]
+		  ZOrder		  -4
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  Value			  "[0;1;0;0]"
+		  VectorParams1D	  off
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant1"
+		  SID			  "139"
+		  Position		  [625, 328, 670, 402]
+		  ZOrder		  -4
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  Value			  "[1;0;0;0]"
+		  VectorParams1D	  off
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant2"
+		  SID			  "143"
+		  Position		  [1050, 137, 1090, 193]
+		  ZOrder		  -4
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  Value			  "[0;0;1;0]"
+		  VectorParams1D	  off
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant3"
+		  SID			  "144"
+		  Position		  [710, 644, 750, 726]
+		  ZOrder		  -4
+		  Value			  "[0;0;0;1]"
+		  VectorParams1D	  off
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Discrete Derivative"
+		  SID			  "343"
+		  Ports			  [1, 1]
+		  Position		  [840, 657, 900, 693]
+		  ZOrder		  -4
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  LibraryVersion	  "1.260"
+		  SourceBlock		  "simulink/Discrete/Discrete Derivative"
+		  SourceType		  "Discrete Derivative"
+		  gainval		  "1.0"
+		  ICPrevScaledInput	  "0.0"
+		  InputProcessing	  "Inherited"
+		  OutMin		  "[]"
+		  OutMax		  "[]"
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  OutputDataTypeScalingMode "Inherit via internal rule"
+		  OutDataType		  "fixdt(1, 16)"
+		  OutScaling		  "2^-10"
+		  LockScale		  off
+		  RndMeth		  "Floor"
+		  DoSatur		  off
+		}
+		Block {
+		  BlockType		  If
+		  Name			  "If"
+		  SID			  "358"
+		  Ports			  [1, 2]
+		  Position		  [1060, 241, 1160, 279]
+		  ZOrder		  -15
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "If Action\nSubsystem"
+		  SID			  "359"
+		  Ports			  [1, 1, 0, 0, 0, 0, 0, 1]
+		  Position		  [875, 147, 945, 183]
+		  ZOrder		  -16
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  TreatAsAtomicUnit	  on
+		  MinAlgLoopOccurrences	  off
+		  PropExecContextOutsideSubsystem off
+		  RTWSystemCode		  "Auto"
+		  FunctionWithSeparateData off
+		  Opaque		  off
+		  RequestExecContextInheritance	off
+		  MaskHideContents	  off
+		  System {
+		    Name		    "If Action\nSubsystem"
+		    Location		    [342, 471, 840, 771]
+		    Open		    off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "A4"
+		    PaperUnits		    "centimeters"
+		    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "In1"
+		    SID			    "360"
+		    Position		    [75, 78, 105, 92]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    ActionPort
+		    Name		    "Action Port"
+		    SID			    "361"
+		    Position		    [170, 15, 229, 43]
+		    ZOrder		    -2
+		    ActionType		    "then"
+		    }
+		    Block {
+		    BlockType		    Outport
+		    Name		    "Out1"
+		    SID			    "362"
+		    Position		    [325, 78, 355, 92]
+		    ZOrder		    -3
+		    IconDisplay		    "Port number"
+		    }
+		    Line {
+		    SrcBlock		    "In1"
+		    SrcPort		    1
+		    DstBlock		    "Out1"
+		    DstPort		    1
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product"
+		  SID			  "136"
+		  Ports			  [2, 1]
+		  Position		  [605, 457, 635, 488]
+		  ZOrder		  -13
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product1"
+		  SID			  "137"
+		  Ports			  [2, 1]
+		  Position		  [605, 562, 635, 593]
+		  ZOrder		  -13
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product2"
+		  SID			  "145"
+		  Ports			  [2, 1]
+		  Position		  [772, 325, 803, 355]
+		  ZOrder		  -13
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product3"
+		  SID			  "146"
+		  Ports			  [2, 1]
+		  Position		  [772, 575, 803, 605]
+		  ZOrder		  -13
+		  BlockRotation		  270
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  SID			  "140"
+		  Ports			  [2, 1]
+		  Position		  [670, 515, 690, 535]
+		  ZOrder		  -18
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "+|+"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum1"
+		  SID			  "142"
+		  Ports			  [3, 1]
+		  Position		  [780, 515, 800, 535]
+		  ZOrder		  -18
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "+++"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "vec(state)"
+		  SID			  "155"
+		  Position		  [825, 518, 855, 532]
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  Points		  [-15, 0; 0, -105]
+		  DstBlock		  "Product1"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Constant1"
+		  SrcPort		  1
+		  Points		  [-50, 0; 0, 100]
+		  DstBlock		  "Product"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Product"
+		  SrcPort		  1
+		  Points		  [40, 0]
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Product1"
+		  SrcPort		  1
+		  Points		  [40, 0]
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Product3"
+		  SrcPort		  1
+		  DstBlock		  "Sum1"
+		  DstPort		  3
+		}
+		Line {
+		  SrcBlock		  "Constant3"
+		  SrcPort		  1
+		  Points		  [25, 0]
+		  DstBlock		  "Product3"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "phi"
+		  SrcPort		  1
+		  Points		  [-15, 0]
+		  Branch {
+		    Points		    [0, 150]
+		    DstBlock		    "Discrete Derivative"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, -215]
+		    DstBlock		    "Product2"
+		    DstPort		    2
+		  }
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Sum1"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "theta"
+		  SrcPort		  1
+		  DstBlock		  "Product"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Sum1"
+		  SrcPort		  1
+		  DstBlock		  "vec(state)"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "theta_speed"
+		  SrcPort		  1
+		  DstBlock		  "Product1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Discrete Derivative"
+		  SrcPort		  1
+		  Points		  [-40, 0]
+		  DstBlock		  "Product3"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Product2"
+		  SrcPort		  1
+		  DstBlock		  "Sum1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "If Action\nSubsystem"
+		  SrcPort		  1
+		  Points		  [-90, 0]
+		  DstBlock		  "Product2"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Constant2"
+		  SrcPort		  1
+		  DstBlock		  "If Action\nSubsystem"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "If"
+		  SrcPort		  1
+		  Points		  [-145, 0]
+		  DstBlock		  "If Action\nSubsystem"
+		  DstPort		  ifaction
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "steering_control"
+	      SID		      "173"
+	      Ports		      [2]
+	      Position		      [812, 280, 923, 370]
+	      BlockRotation	      270
+	      BlockMirror	      on
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"steering_control"
+		Location		[2, 83, 1918, 1147]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "steervalue"
+		  SID			  "175"
+		  Position		  [195, 475, 210, 505]
+		  NamePlacement		  "alternate"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "u(phi_speed)"
+		  SID			  "174"
+		  Position		  [655, 195, 685, 210]
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "Constant"
+		  SID			  "206"
+		  Position		  [300, 475, 330, 505]
+		  ZOrder		  -4
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Motor"
+		  SID			  "163"
+		  Ports			  [1]
+		  Position		  [550, 630, 610, 750]
+		  ZOrder		  -12
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  LibraryVersion	  "1.262"
+		  SourceBlock		  "legonxtlib/Motor"
+		  SourceType		  "LEGO MINDSTORMS NXT Motor"
+		  sportNumber		  "A"
+		  sstopAction		  "Brake"
+		}
+		Block {
+		  BlockType		  Reference
+		  Name			  "Motor1"
+		  SID			  "164"
+		  Ports			  [1]
+		  Position		  [755, 630, 815, 750]
+		  ZOrder		  -12
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  LibraryVersion	  "1.262"
+		  SourceBlock		  "legonxtlib/Motor"
+		  SourceType		  "LEGO MINDSTORMS NXT Motor"
+		  sportNumber		  "C"
+		  sstopAction		  "Brake"
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product"
+		  SID			  "202"
+		  Ports			  [2, 1]
+		  Position		  [767, 530, 798, 560]
+		  ZOrder		  -13
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "Product1"
+		  SID			  "203"
+		  Ports			  [2, 1]
+		  Position		  [562, 530, 593, 560]
+		  ZOrder		  -13
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  SID			  "204"
+		  Ports			  [2, 1]
+		  Position		  [340, 440, 360, 460]
+		  ZOrder		  -18
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "|++"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum1"
+		  SID			  "205"
+		  Ports			  [2, 1]
+		  Position		  [365, 480, 385, 500]
+		  ZOrder		  -18
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "|+-"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Product
+		  Name			  "calculate % of phi_speed"
+		  SID			  "176"
+		  Ports			  [2, 1]
+		  Position		  [662, 310, 693, 340]
+		  ZOrder		  -13
+		  BlockRotation		  270
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  Constant
+		  Name			  "calculation factor"
+		  SID			  "177"
+		  Position		  [745, 270, 790, 300]
+		  ZOrder		  -4
+		  BlockMirror		  on
+		  NamePlacement		  "alternate"
+		  Value			  "0.10417"
+		}
+		Line {
+		  SrcBlock		  "u(phi_speed)"
+		  SrcPort		  1
+		  DstBlock		  "calculate % of phi_speed"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "calculation factor"
+		  SrcPort		  1
+		  Points		  [-55, 0]
+		  DstBlock		  "calculate % of phi_speed"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Product"
+		  SrcPort		  1
+		  DstBlock		  "Motor1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Product1"
+		  SrcPort		  1
+		  DstBlock		  "Motor"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "calculate % of phi_speed"
+		  SrcPort		  1
+		  Points		  [0, 85]
+		  Branch {
+		    Points		    [-95, 0]
+		    DstBlock		    "Product1"
+		    DstPort		    2
+		  }
+		  Branch {
+		    Points		    [110, 0]
+		    DstBlock		    "Product"
+		    DstPort		    2
+		  }
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  Points		  [15, 0; 0, -5]
+		  Branch {
+		    DstBlock		    "Sum"
+		    DstPort		    2
+		  }
+		  Branch {
+		    DstBlock		    "Sum1"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "steervalue"
+		  SrcPort		  1
+		  Points		  [55, 0; 0, -5]
+		  Branch {
+		    Points		    [0, -35]
+		    DstBlock		    "Sum"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 60; 105, 0]
+		    DstBlock		    "Sum1"
+		    DstPort		    2
+		  }
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  Points		  [205, 0]
+		  DstBlock		  "Product1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Sum1"
+		  SrcPort		  1
+		  Points		  [385, 0]
+		  DstBlock		  "Product"
+		  DstPort		  1
+		}
+		Annotation {
+		  SID			  "178"
+		  Name			  "max phi_speed = ~160 rpm"
+		  Position		  [1072, 198]
+		}
+		Annotation {
+		  SID			  "179"
+		  Name			  "1 rpm = 6°/s"
+		  Position		  [1070, 219]
+		}
+		Annotation {
+		  SID			  "182"
+		  Name			  "max phi_speed = 960°/s"
+		  Position		  [1070, 235]
+		}
+		Annotation {
+		  SID			  "184"
+		  Name			  "phi_speed *100/ 960°/s = phi_speed%"
+		  Position		  [1070, 249]
+		}
+		Annotation {
+		  SID			  "207"
+		  Name			  "todo:\nsteering for the case of phi_soll = 0\n(probably  requires redesigning steering control. Watch ou"
+		  "t for stability loss. (cap turnspeed to prevent stability loss))"
+		  Position		  [325, 20]
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "testvalues"
+	      SID		      "302"
+	      Ports		      [2]
+	      Position		      [585, 146, 645, 219]
+	      BlockMirror	      on
+	      NamePlacement	      "alternate"
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"testvalues"
+		Location		[141, 136, 922, 438]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "state"
+		  SID			  "303"
+		  Position		  [75, 231, 125, 249]
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  Inport
+		  Name			  "u"
+		  SID			  "305"
+		  Position		  [445, 230, 475, 245]
+		  BlockRotation		  270
+		  Port			  "2"
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  DataStoreRead
+		  Name			  "Data tore\nead1"
+		  SID			  "288"
+		  Ports			  [0, 1]
+		  Position		  [25, 24, 80, 56]
+		  ZOrder		  -5
+		  ShowName		  off
+		  DataStoreName		  "gyro_offset"
+		}
+		Block {
+		  BlockType		  SubSystem
+		  Name			  "System"
+		  SID			  "276"
+		  Ports			  [2, 1]
+		  Position		  [369, 60, 491, 165]
+		  ZOrder		  -17
+		  BlockRotation		  270
+		  MinAlgLoopOccurrences	  off
+		  PropExecContextOutsideSubsystem off
+		  RTWSystemCode		  "Auto"
+		  FunctionWithSeparateData off
+		  Opaque		  off
+		  RequestExecContextInheritance	off
+		  MaskHideContents	  off
+		  System {
+		    Name		    "System"
+		    Location		    [-52, 126, 1868, 1023]
+		    Open		    off
+		    ModelBrowserVisibility  off
+		    ModelBrowserWidth	    200
+		    ScreenColor		    "white"
+		    PaperOrientation	    "landscape"
+		    PaperPositionMode	    "auto"
+		    PaperType		    "A4"
+		    PaperUnits		    "centimeters"
+		    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
+		    TiledPageScale	    1
+		    ShowPageBoundaries	    off
+		    ZoomFactor		    "100"
+		    Block {
+		    BlockType		    Inport
+		    Name		    "state"
+		    SID			    "277"
+		    Position		    [150, 223, 180, 237]
+		    ZOrder		    -1
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Inport
+		    Name		    "u"
+		    SID			    "278"
+		    Position		    [738, 460, 752, 490]
+		    ZOrder		    -1
+		    BlockRotation	    270
+		    Port		    "2"
+		    IconDisplay		    "Port number"
+		    }
+		    Block {
+		    BlockType		    Constant
+		    Name		    "B"
+		    SID			    "285"
+		    Position		    [820, 345, 885, 415]
+		    ZOrder		    -4
+		    BlockMirror		    on
+		    NamePlacement	    "alternate"
+		    Value		    "[   0;0.1530\n;0;10.0000]"
+		    VectorParams1D	    off
+		    }
+		    Block {
+		    BlockType		    Constant
+		    Name		    "Constant"
+		    SID			    "279"
+		    Position		    [270, 23, 475, 137]
+		    ZOrder		    -4
+		    Value		    "[\n0 , 1.0000 ,0  , 0 ; 50.0170,0 , 0, 0.1530\n ; 0 , 0 , 0 , 1.0000; 0 , 0 , 0  ,-10.0000]"
+		    VectorParams1D	    off
+		    }
+		    Block {
+		    BlockType		    Integrator
+		    Name		    "Integrator"
+		    SID			    "280"
+		    Ports		    [1, 1]
+		    Position		    [900, 205, 930, 235]
+		    ZOrder		    -2
+		    Port {
+		    PortNumber		    1
+		    Name		    "x"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		    }
+		    }
+		    Block {
+		    BlockType		    Product
+		    Name		    "Product"
+		    SID			    "281"
+		    Ports		    [2, 1]
+		    Position		    [555, 194, 605, 241]
+		    ZOrder		    -13
+		    Multiplication	    "Matrix(*)"
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    Port {
+		    PortNumber		    1
+		    Name		    "A*x"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		    }
+		    }
+		    Block {
+		    BlockType		    Product
+		    Name		    "Product1"
+		    SID			    "286"
+		    Ports		    [2, 1]
+		    Position		    [737, 305, 768, 335]
+		    ZOrder		    -13
+		    BlockRotation	    270
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    Port {
+		    PortNumber		    1
+		    Name		    "B*u"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		    }
+		    }
+		    Block {
+		    BlockType		    Sum
+		    Name		    "Sum"
+		    SID			    "282"
+		    Ports		    [2, 1]
+		    Position		    [745, 210, 765, 230]
+		    ZOrder		    -18
+		    ShowName		    off
+		    IconShape		    "round"
+		    Inputs		    "|++"
+		    InputSameDT		    off
+		    OutDataTypeStr	    "Inherit: Inherit via internal rule"
+		    SaturateOnIntegerOverflow off
+		    Port {
+		    PortNumber		    1
+		    Name		    "dx/dt = A*x + B*u"
+		    RTWStorageClass	    "Auto"
+		    DataLoggingNameMode	    "SignalName"
+		    }
+		    }
+		    Block {
+		    BlockType		    Outport
+		    Name		    "state_out"
+		    SID			    "283"
+		    Position		    [1210, 213, 1240, 227]
+		    ZOrder		    -2
+		    IconDisplay		    "Port number"
+		    }
+		    Line {
+		    Name		    "A*x"
+		    Labels		    [0, 0]
+		    SrcBlock		    "Product"
+		    SrcPort		    1
+		    DstBlock		    "Sum"
+		    DstPort		    1
+		    }
+		    Line {
+		    Name		    "dx/dt = A*x + B*u"
+		    Labels		    [0, 0]
+		    SrcBlock		    "Sum"
+		    SrcPort		    1
+		    DstBlock		    "Integrator"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "state"
+		    SrcPort		    1
+		    DstBlock		    "Product"
+		    DstPort		    2
+		    }
+		    Line {
+		    SrcBlock		    "Constant"
+		    SrcPort		    1
+		    Points		    [0, 125]
+		    DstBlock		    "Product"
+		    DstPort		    1
+		    }
+		    Line {
+		    Name		    "x"
+		    Labels		    [0, 0]
+		    SrcBlock		    "Integrator"
+		    SrcPort		    1
+		    DstBlock		    "state_out"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "u"
+		    SrcPort		    1
+		    DstBlock		    "Product1"
+		    DstPort		    1
+		    }
+		    Line {
+		    SrcBlock		    "B"
+		    SrcPort		    1
+		    Points		    [-55, 0]
+		    DstBlock		    "Product1"
+		    DstPort		    2
+		    }
+		    Line {
+		    Name		    "B*u"
+		    Labels		    [0, 0]
+		    SrcBlock		    "Product1"
+		    SrcPort		    1
+		    DstBlock		    "Sum"
+		    DstPort		    2
+		    }
+		  }
+		}
+		Block {
+		  BlockType		  ToFile
+		  Name			  "To File"
+		  SID			  "224"
+		  Ports			  [1]
+		  Position		  [237, 65, 323, 155]
+		  ZOrder		  -6
+		  BlockRotation		  270
+		  NamePlacement		  "alternate"
+		  Filename		  "states_sensor.mat"
+		}
+		Block {
+		  BlockType		  ToFile
+		  Name			  "To File1"
+		  SID			  "284"
+		  Ports			  [1]
+		  Position		  [520, 27, 600, 63]
+		  ZOrder		  -6
+		  Filename		  "test_obs.mat"
+		}
+		Block {
+		  BlockType		  ToFile
+		  Name			  "To File2"
+		  SID			  "287"
+		  Ports			  [1]
+		  Position		  [125, 25, 185, 55]
+		  ZOrder		  -6
+		  Filename		  "offset.mat"
+		  SaveFormat		  "Timeseries"
+		}
+		Line {
+		  SrcBlock		  "System"
+		  SrcPort		  1
+		  Points		  [0, -10]
+		  DstBlock		  "To File1"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "Data tore\nead1"
+		  SrcPort		  1
+		  DstBlock		  "To File2"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "state"
+		  SrcPort		  1
+		  Points		  [150, 0]
+		  Branch {
+		    DstBlock		    "To File"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [120, 0]
+		    DstBlock		    "System"
+		    DstPort		    1
+		  }
+		}
+		Line {
+		  SrcBlock		  "u"
+		  SrcPort		  1
+		  DstBlock		  "System"
+		  DstPort		  2
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Magic_0.1"
+	      SrcPort		      1
+	      Points		      [110, 0]
+	      DstBlock		      "state.get"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Magic_0.1"
+	      SrcPort		      2
+	      Points		      [160, 0]
+	      DstBlock		      "state.get"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "state.get"
+	      SrcPort		      1
+	      Points		      [0, -20; 260, 0]
+	      Branch {
+		Points			[155, 0]
+		DstBlock		"Controller"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 130]
+		DstBlock		"testvalues"
+		DstPort			1
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Controller"
+	      SrcPort		      1
+	      Points		      [0, 15]
+	      Branch {
+		DstBlock		"steering_control"
+		DstPort			2
+	      }
+	      Branch {
+		Labels			[0, 0]
+		DstBlock		"testvalues"
+		DstPort			2
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "phi_speed_soll"
+	      SrcPort		      1
+	      Points		      [-130, 0]
+	      DstBlock		      "Controller"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "theta_speed_in"
+	      SrcPort		      1
+	      DstBlock		      "Magic_0.1"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "z_in"
+	      SrcPort		      1
+	      DstBlock		      "Magic_0.1"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "steervalue"
+	      SrcPort		      1
+	      DstBlock		      "steering_control"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "phi"
+	      SrcPort		      1
+	      Points		      [410, 0]
+	      DstBlock		      "state.get"
+	      DstPort		      3
+	    }
+	    Annotation {
+	      SID		      "357"
+	      Name		      "todo:\nif phi_speed_soll is != 0 set state phi = 0 and reset\nphi AFTER phi_speed_soll drops to 0 "
+	      "again!"
+	      Position		      [152, 536]
+	    }
+	  }
+	}
+	Block {
+	  BlockType		  DataStoreRead
+	  Name			  "Data Store\nRead"
+	  SID			  "263"
+	  Ports			  [0, 1]
+	  Position		  [980, 675, 1010, 735]
+	  ZOrder		  -5
+	  BlockRotation		  270
+	  ShowName		  off
+	  DataStoreName		  "offset_flag"
+	}
+	Block {
+	  BlockType		  SubSystem
+	  Name			  "Gyrooffset"
+	  SID			  "228"
+	  Ports			  [1, 0, 0, 0, 0, 0, 0, 1]
+	  Position		  [174, 490, 256, 615]
+	  BlockRotation		  270
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  MinAlgLoopOccurrences	  off
+	  PropExecContextOutsideSubsystem off
+	  RTWSystemCode		  "Auto"
+	  FunctionWithSeparateData off
+	  Opaque		  off
+	  RequestExecContextInheritance	off
+	  MaskHideContents	  off
+	  System {
+	    Name		    "Gyrooffset"
+	    Location		    [-73, 261, 1843, 1134]
 	    Open		    off
 	    ModelBrowserVisibility  off
 	    ModelBrowserWidth	    200
@@ -1409,23 +3203,33 @@ Model {
 	    Block {
 	      BlockType		      Inport
 	      Name		      "Gyro_input"
-	      SID		      "108"
+	      SID		      "229"
 	      Position		      [245, 303, 275, 317]
 	      ZOrder		      -1
 	      IconDisplay	      "Port number"
 	    }
 	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant"
-	      SID		      "95"
-	      Position		      [595, 375, 625, 405]
-	      ZOrder		      -4
-	      Value		      "100"
+	      BlockType		      ActionPort
+	      Name		      "Action Port"
+	      SID		      "323"
+	      Position		      [640, 70, 699, 98]
+	      ZOrder		      -2
+	    }
+	    Block {
+	      BlockType		      UnitDelay
+	      Name		      "Calculate dif \nbetween two\nmeasures"
+	      SID		      "269"
+	      Position		      [353, 400, 387, 435]
+	      ZOrder		      -21
+	      BlockRotation	      270
+	      BlockMirror	      on
+	      InputProcessing	      "Elements as channels (sample based)"
+	      SampleTime	      "-1"
 	    }
 	    Block {
 	      BlockType		      Product
 	      Name		      "Divide"
-	      SID		      "94"
+	      SID		      "232"
 	      Ports		      [2, 1]
 	      Position		      [655, 302, 685, 333]
 	      ZOrder		      -8
@@ -1436,9 +3240,38 @@ Model {
 	      SaturateOnIntegerOverflow	off
 	    }
 	    Block {
+	      BlockType		      DataStoreWrite
+	      Name		      "Dta Store\nWrite"
+	      SID		      "271"
+	      Ports		      [1]
+	      Position		      [1015, 485, 1100, 515]
+	      ZOrder		      -6
+	      ShowName		      off
+	      DataStoreName	      "offset_flag"
+	    }
+	    Block {
+	      BlockType		      DataStoreWrite
+	      Name		      "Gyro offset"
+	      SID		      "233"
+	      Ports		      [1]
+	      Position		      [925, 405, 980, 435]
+	      ZOrder		      -6
+	      DataStoreName	      "gyro_offset"
+	    }
+	    Block {
 	      BlockType		      If
-	      Name		      "If"
-	      SID		      "77"
+	      Name		      "If in Range [-2:2]"
+	      SID		      "257"
+	      Ports		      [1, 1]
+	      Position		      [350, 136, 450, 174]
+	      ZOrder		      -15
+	      IfExpression	      "u1 >= -2  & u1 <= 2"
+	      ShowElse		      off
+	    }
+	    Block {
+	      BlockType		      If
+	      Name		      "If in Range [-2:2]_2"
+	      SID		      "235"
 	      Ports		      [1, 1]
 	      Position		      [345, 521, 445, 559]
 	      ZOrder		      -15
@@ -1446,9 +3279,213 @@ Model {
 	      ShowElse		      off
 	    }
 	    Block {
+	      BlockType		      Sum
+	      Name		      "Sum"
+	      SID		      "270"
+	      Ports		      [2, 1]
+	      Position		      [310, 455, 330, 475]
+	      ZOrder		      -18
+	      BlockRotation	      270
+	      BlockMirror	      on
+	      NamePlacement	      "alternate"
+	      ShowName		      off
+	      IconShape		      "round"
+	      Inputs		      "|+-"
+	      InputSameDT	      off
+	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+	      SaturateOnIntegerOverflow	off
+	    }
+	    Block {
 	      BlockType		      SubSystem
-	      Name		      "If Action\nSubsystem"
-	      SID		      "73"
+	      Name		      "Sum up if in range"
+	      SID		      "251"
+	      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
+	      Position		      [510, 292, 580, 328]
+	      ZOrder		      -16
+	      TreatAsAtomicUnit	      on
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"Sum up if in range"
+		Location		[342, 471, 840, 771]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "In1"
+		  SID			  "252"
+		  Position		  [25, 78, 55, 92]
+		  ZOrder		  -1
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  ActionPort
+		  Name			  "Action Port"
+		  SID			  "253"
+		  Position		  [170, 15, 229, 43]
+		  ZOrder		  -2
+		}
+		Block {
+		  BlockType		  Sum
+		  Name			  "Sum"
+		  SID			  "254"
+		  Ports			  [2, 1]
+		  Position		  [110, 75, 130, 95]
+		  ZOrder		  -18
+		  ShowName		  off
+		  IconShape		  "round"
+		  Inputs		  "|++"
+		  InputSameDT		  off
+		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
+		  SaturateOnIntegerOverflow off
+		}
+		Block {
+		  BlockType		  UnitDelay
+		  Name			  "Unit Delay"
+		  SID			  "255"
+		  Position		  [185, 68, 220, 102]
+		  ZOrder		  -18
+		  InputProcessing	  "Elements as channels (sample based)"
+		  SampleTime		  "-1"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "Out1"
+		  SID			  "256"
+		  Position		  [410, 78, 440, 92]
+		  ZOrder		  -3
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "Unit Delay"
+		  SrcPort		  1
+		  Points		  [25, 0]
+		  Branch {
+		    DstBlock		    "Out1"
+		    DstPort		    1
+		  }
+		  Branch {
+		    Points		    [0, 60; -130, 0]
+		    DstBlock		    "Sum"
+		    DstPort		    2
+		  }
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
+		}
+		Line {
+		  SrcBlock		  "In1"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      If
+	      Name		      "if 100 actions reached"
+	      SID		      "258"
+	      Ports		      [1, 1]
+	      Position		      [655, 481, 755, 519]
+	      ZOrder		      -15
+	      IfExpression	      "u1 == 100"
+	      ShowElse		      off
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "pass through \nif 100 actions\nare reached"
+	      SID		      "247"
+	      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
+	      Position		      [772, 335, 808, 405]
+	      ZOrder		      -16
+	      BlockRotation	      270
+	      BlockMirror	      on
+	      NamePlacement	      "alternate"
+	      TreatAsAtomicUnit	      on
+	      MinAlgLoopOccurrences   off
+	      PropExecContextOutsideSubsystem off
+	      RTWSystemCode	      "Auto"
+	      FunctionWithSeparateData off
+	      Opaque		      off
+	      RequestExecContextInheritance off
+	      MaskHideContents	      off
+	      System {
+		Name			"pass through \nif 100 actions\nare reached"
+		Location		[342, 471, 840, 771]
+		Open			off
+		ModelBrowserVisibility	off
+		ModelBrowserWidth	200
+		ScreenColor		"white"
+		PaperOrientation	"landscape"
+		PaperPositionMode	"auto"
+		PaperType		"A4"
+		PaperUnits		"centimeters"
+		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
+		TiledPageScale		1
+		ShowPageBoundaries	off
+		ZoomFactor		"100"
+		Block {
+		  BlockType		  Inport
+		  Name			  "In1"
+		  SID			  "248"
+		  Position		  [75, 78, 105, 92]
+		  ZOrder		  -1
+		  IconDisplay		  "Port number"
+		}
+		Block {
+		  BlockType		  ActionPort
+		  Name			  "Action Port"
+		  SID			  "249"
+		  Position		  [170, 15, 229, 43]
+		  ZOrder		  -2
+		  ActionType		  "then"
+		}
+		Block {
+		  BlockType		  Outport
+		  Name			  "Out1"
+		  SID			  "250"
+		  Position		  [325, 78, 355, 92]
+		  ZOrder		  -3
+		  IconDisplay		  "Port number"
+		}
+		Line {
+		  SrcBlock		  "In1"
+		  SrcPort		  1
+		  DstBlock		  "Out1"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Block {
+	      BlockType		      Constant
+	      Name		      "taken over 100 cycles"
+	      SID		      "230"
+	      Position		      [595, 375, 625, 405]
+	      ZOrder		      -4
+	      Value		      "100"
+	    }
+	    Block {
+	      BlockType		      SubSystem
+	      Name		      "zählwerk"
+	      SID		      "236"
 	      Ports		      [0, 1, 0, 0, 0, 0, 0, 1]
 	      Position		      [527, 505, 563, 575]
 	      ZOrder		      -16
@@ -1462,7 +3499,7 @@ Model {
 	      RequestExecContextInheritance off
 	      MaskHideContents	      off
 	      System {
-		Name			"If Action\nSubsystem"
+		Name			"zählwerk"
 		Location		[696, 474, 1434, 959]
 		Open			off
 		ModelBrowserVisibility	off
@@ -1479,22 +3516,21 @@ Model {
 		Block {
 		  BlockType		  ActionPort
 		  Name			  "Action Port"
-		  SID			  "75"
+		  SID			  "237"
 		  Position		  [170, 15, 229, 43]
 		  ZOrder		  -2
-		  ActionType		  "then"
 		}
 		Block {
 		  BlockType		  Constant
 		  Name			  "Constant"
-		  SID			  "83"
+		  SID			  "238"
 		  Position		  [50, 135, 80, 165]
 		  ZOrder		  -4
 		}
 		Block {
 		  BlockType		  If
 		  Name			  "If"
-		  SID			  "102"
+		  SID			  "239"
 		  Ports			  [1, 1]
 		  Position		  [389, 205, 441, 305]
 		  ZOrder		  -15
@@ -1507,7 +3543,7 @@ Model {
 		Block {
 		  BlockType		  SubSystem
 		  Name			  "If Action\nSubsystem"
-		  SID			  "103"
+		  SID			  "240"
 		  Ports			  [0, 1, 0, 0, 0, 0, 0, 1]
 		  Position		  [187, 290, 223, 360]
 		  ZOrder		  -16
@@ -1538,15 +3574,14 @@ Model {
 		    Block {
 		    BlockType		    ActionPort
 		    Name		    "Action Port"
-		    SID			    "105"
+		    SID			    "241"
 		    Position		    [170, 15, 229, 43]
 		    ZOrder		    -2
-		    ActionType		    "then"
 		    }
 		    Block {
 		    BlockType		    Constant
 		    Name		    "Constant"
-		    SID			    "107"
+		    SID			    "242"
 		    Position		    [200, 70, 230, 100]
 		    ZOrder		    -4
 		    Value		    "20"
@@ -1554,7 +3589,7 @@ Model {
 		    Block {
 		    BlockType		    Outport
 		    Name		    "Out1"
-		    SID			    "106"
+		    SID			    "243"
 		    Position		    [325, 78, 355, 92]
 		    ZOrder		    -3
 		    IconDisplay		    "Port number"
@@ -1570,7 +3605,7 @@ Model {
 		Block {
 		  BlockType		  Sum
 		  Name			  "Sum"
-		  SID			  "85"
+		  SID			  "244"
 		  Ports			  [3, 1]
 		  Position		  [130, 140, 150, 160]
 		  ZOrder		  -18
@@ -1584,7 +3619,7 @@ Model {
 		Block {
 		  BlockType		  UnitDelay
 		  Name			  "Unit Delay"
-		  SID			  "84"
+		  SID			  "245"
 		  Position		  [215, 133, 250, 167]
 		  ZOrder		  -18
 		  InputProcessing	  "Elements as channels (sample based)"
@@ -1593,34 +3628,29 @@ Model {
 		Block {
 		  BlockType		  Outport
 		  Name			  "Out1"
-		  SID			  "76"
+		  SID			  "246"
 		  Position		  [445, 78, 475, 92]
 		  ZOrder		  -3
 		  IconDisplay		  "Port number"
 		}
 		Line {
-		  Labels		  [0, 0]
-		  SrcBlock		  "Unit Delay"
+		  SrcBlock		  "If"
 		  SrcPort		  1
-		  Points		  [45, 0]
-		  Branch {
-		    Points		    [0, -25]
-		    DstBlock		    "Sum"
-		    DstPort		    1
-		  }
-		  Branch {
-		    Labels		    [1, 0]
-		    Points		    [115, 0]
-		    Branch {
-		    Points		    [15, 0]
-		    DstBlock		    "Out1"
-		    DstPort		    1
-		    }
-		    Branch {
-		    DstBlock		    "If"
-		    DstPort		    1
-		    }
-		  }
+		  Points		  [0, 60; -243, 0]
+		  DstBlock		  "If Action\nSubsystem"
+		  DstPort		  ifaction
+		}
+		Line {
+		  SrcBlock		  "Constant"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  2
+		}
+		Line {
+		  SrcBlock		  "Sum"
+		  SrcPort		  1
+		  DstBlock		  "Unit Delay"
+		  DstPort		  1
 		}
 		Line {
 		  SrcBlock		  "If Action\nSubsystem"
@@ -1630,865 +3660,298 @@ Model {
 		  DstPort		  3
 		}
 		Line {
-		  SrcBlock		  "Sum"
-		  SrcPort		  1
-		  DstBlock		  "Unit Delay"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Constant"
-		  SrcPort		  1
-		  DstBlock		  "Sum"
-		  DstPort		  2
-		}
-		Line {
-		  SrcBlock		  "If"
-		  SrcPort		  1
-		  Points		  [0, 60; -243, 0]
-		  DstBlock		  "If Action\nSubsystem"
-		  DstPort		  ifaction
-		}
-	      }
-	    }
-	    Block {
-	      BlockType		      SubSystem
-	      Name		      "If Action\nSubsystem1"
-	      SID		      "78"
-	      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-	      Position		      [772, 335, 808, 405]
-	      ZOrder		      -16
-	      BlockRotation	      270
-	      BlockMirror	      on
-	      NamePlacement	      "alternate"
-	      TreatAsAtomicUnit	      on
-	      MinAlgLoopOccurrences   off
-	      PropExecContextOutsideSubsystem off
-	      RTWSystemCode	      "Auto"
-	      FunctionWithSeparateData off
-	      Opaque		      off
-	      RequestExecContextInheritance off
-	      MaskHideContents	      off
-	      System {
-		Name			"If Action\nSubsystem1"
-		Location		[342, 471, 840, 771]
-		Open			off
-		ModelBrowserVisibility	off
-		ModelBrowserWidth	200
-		ScreenColor		"white"
-		PaperOrientation	"landscape"
-		PaperPositionMode	"auto"
-		PaperType		"A4"
-		PaperUnits		"centimeters"
-		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-		TiledPageScale		1
-		ShowPageBoundaries	off
-		ZoomFactor		"100"
-		Block {
-		  BlockType		  Inport
-		  Name			  "In1"
-		  SID			  "79"
-		  Position		  [75, 78, 105, 92]
-		  ZOrder		  -1
-		  IconDisplay		  "Port number"
-		}
-		Block {
-		  BlockType		  ActionPort
-		  Name			  "Action Port"
-		  SID			  "80"
-		  Position		  [170, 15, 229, 43]
-		  ZOrder		  -2
-		  ActionType		  "then"
-		}
-		Block {
-		  BlockType		  Outport
-		  Name			  "Out1"
-		  SID			  "81"
-		  Position		  [325, 78, 355, 92]
-		  ZOrder		  -3
-		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "In1"
-		  SrcPort		  1
-		  DstBlock		  "Out1"
-		  DstPort		  1
-		}
-	      }
-	    }
-	    Block {
-	      BlockType		      SubSystem
-	      Name		      "If Action\nSubsystem2"
-	      SID		      "88"
-	      Ports		      [1, 1, 0, 0, 0, 0, 0, 1]
-	      Position		      [510, 292, 580, 328]
-	      ZOrder		      -16
-	      TreatAsAtomicUnit	      on
-	      MinAlgLoopOccurrences   off
-	      PropExecContextOutsideSubsystem off
-	      RTWSystemCode	      "Auto"
-	      FunctionWithSeparateData off
-	      Opaque		      off
-	      RequestExecContextInheritance off
-	      MaskHideContents	      off
-	      System {
-		Name			"If Action\nSubsystem2"
-		Location		[342, 471, 840, 771]
-		Open			off
-		ModelBrowserVisibility	off
-		ModelBrowserWidth	200
-		ScreenColor		"white"
-		PaperOrientation	"landscape"
-		PaperPositionMode	"auto"
-		PaperType		"A4"
-		PaperUnits		"centimeters"
-		TiledPaperMargins	[1.270000, 1.270000, 1.270000, 1.270000]
-		TiledPageScale		1
-		ShowPageBoundaries	off
-		ZoomFactor		"100"
-		Block {
-		  BlockType		  Inport
-		  Name			  "In1"
-		  SID			  "89"
-		  Position		  [25, 78, 55, 92]
-		  ZOrder		  -1
-		  IconDisplay		  "Port number"
-		}
-		Block {
-		  BlockType		  ActionPort
-		  Name			  "Action Port"
-		  SID			  "90"
-		  Position		  [170, 15, 229, 43]
-		  ZOrder		  -2
-		  ActionType		  "then"
-		}
-		Block {
-		  BlockType		  Sum
-		  Name			  "Sum"
-		  SID			  "92"
-		  Ports			  [2, 1]
-		  Position		  [110, 75, 130, 95]
-		  ZOrder		  -18
-		  ShowName		  off
-		  IconShape		  "round"
-		  Inputs		  "|++"
-		  InputSameDT		  off
-		  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-		  SaturateOnIntegerOverflow off
-		}
-		Block {
-		  BlockType		  UnitDelay
-		  Name			  "Unit Delay"
-		  SID			  "93"
-		  Position		  [185, 68, 220, 102]
-		  ZOrder		  -18
-		  InputProcessing	  "Elements as channels (sample based)"
-		  SampleTime		  "-1"
-		}
-		Block {
-		  BlockType		  Outport
-		  Name			  "Out1"
-		  SID			  "91"
-		  Position		  [410, 78, 440, 92]
-		  ZOrder		  -3
-		  IconDisplay		  "Port number"
-		}
-		Line {
-		  SrcBlock		  "In1"
-		  SrcPort		  1
-		  DstBlock		  "Sum"
-		  DstPort		  1
-		}
-		Line {
-		  SrcBlock		  "Sum"
-		  SrcPort		  1
-		  DstBlock		  "Unit Delay"
-		  DstPort		  1
-		}
-		Line {
+		  Labels		  [0, 0]
 		  SrcBlock		  "Unit Delay"
 		  SrcPort		  1
-		  Points		  [25, 0]
+		  Points		  [45, 0]
 		  Branch {
-		    Points		    [0, 60; -130, 0]
-		    DstBlock		    "Sum"
-		    DstPort		    2
+		    Labels		    [1, 0]
+		    Points		    [115, 0]
+		    Branch {
+		    DstBlock		    "If"
+		    DstPort		    1
+		    }
+		    Branch {
+		    Points		    [15, 0]
+		    DstBlock		    "Out1"
+		    DstPort		    1
+		    }
 		  }
 		  Branch {
-		    DstBlock		    "Out1"
+		    Points		    [0, -25]
+		    DstBlock		    "Sum"
 		    DstPort		    1
 		  }
 		}
 	      }
 	    }
-	    Block {
-	      BlockType		      If
-	      Name		      "If1"
-	      SID		      "96"
-	      Ports		      [1, 1]
-	      Position		      [340, 186, 440, 224]
-	      ZOrder		      -15
-	      IfExpression	      "u1 >= -2  & u1 <= 2"
-	      ShowElse		      off
-	    }
-	    Block {
-	      BlockType		      If
-	      Name		      "If2"
-	      SID		      "97"
-	      Ports		      [1, 1]
-	      Position		      [655, 481, 755, 519]
-	      ZOrder		      -15
-	      IfExpression	      "u1 >= 20"
-	      ShowElse		      off
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "Gyro_offset"
-	      SID		      "109"
-	      Position		      [1185, 413, 1215, 427]
-	      ZOrder		      -23
-	      IconDisplay	      "Port number"
+	    Line {
+	      SrcBlock		      "pass through \nif 100 actions\nare reached"
+	      SrcPort		      1
+	      Points		      [0, 10]
+	      DstBlock		      "Gyro offset"
+	      DstPort		      1
 	    }
 	    Line {
-	      SrcBlock		      "Gyro_input"
+	      SrcBlock		      "if 100 actions reached"
 	      SrcPort		      1
-	      Points		      [40, 0]
+	      Points		      [70, 0]
 	      Branch {
-		Points			[0, 230]
-		DstBlock		"If"
-		DstPort			1
+		Points			[0, -130]
+		DstBlock		"pass through \nif 100 actions\nare reached"
+		DstPort			ifaction
 	      }
 	      Branch {
-		DstBlock		"If Action\nSubsystem2"
-		DstPort			1
-	      }
-	      Branch {
-		Points			[0, -105]
-		DstBlock		"If1"
+		DstBlock		"Dta Store\nWrite"
 		DstPort			1
 	      }
 	    }
 	    Line {
-	      Labels		      [0, 0]
-	      SrcBlock		      "If"
+	      SrcBlock		      "If in Range [-2:2]"
 	      SrcPort		      1
-	      DstBlock		      "If Action\nSubsystem"
+	      Points		      [90, 0]
+	      DstBlock		      "Sum up if in range"
 	      DstPort		      ifaction
 	    }
 	    Line {
-	      SrcBlock		      "If Action\nSubsystem"
-	      SrcPort		      1
-	      DstBlock		      "If2"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "If Action\nSubsystem2"
-	      SrcPort		      1
-	      DstBlock		      "Divide"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Divide"
-	      SrcPort		      1
-	      DstBlock		      "If Action\nSubsystem1"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Constant"
+	      SrcBlock		      "taken over 100 cycles"
 	      SrcPort		      1
 	      Points		      [5, 0; 0, -65]
 	      DstBlock		      "Divide"
 	      DstPort		      2
 	    }
 	    Line {
-	      SrcBlock		      "If1"
+	      SrcBlock		      "Divide"
 	      SrcPort		      1
-	      Points		      [100, 0]
-	      DstBlock		      "If Action\nSubsystem2"
-	      DstPort		      ifaction
-	    }
-	    Line {
-	      SrcBlock		      "If2"
-	      SrcPort		      1
-	      Points		      [70, 0; 0, -130]
-	      DstBlock		      "If Action\nSubsystem1"
-	      DstPort		      ifaction
-	    }
-	    Line {
-	      SrcBlock		      "If Action\nSubsystem1"
-	      SrcPort		      1
-	      Points		      [0, 10]
-	      DstBlock		      "Gyro_offset"
+	      DstBlock		      "pass through \nif 100 actions\nare reached"
 	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "Sum up if in range"
+	      SrcPort		      1
+	      DstBlock		      "Divide"
+	      DstPort		      1
+	    }
+	    Line {
+	      SrcBlock		      "zählwerk"
+	      SrcPort		      1
+	      DstBlock		      "if 100 actions reached"
+	      DstPort		      1
+	    }
+	    Line {
+	      Labels		      [0, 0]
+	      SrcBlock		      "If in Range [-2:2]_2"
+	      SrcPort		      1
+	      DstBlock		      "zählwerk"
+	      DstPort		      ifaction
+	    }
+	    Line {
+	      SrcBlock		      "Gyro_input"
+	      SrcPort		      1
+	      Points		      [40, 0]
+	      Branch {
+		DstBlock		"Sum up if in range"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[0, 45]
+		Branch {
+		  DstBlock		  "Sum"
+		  DstPort		  1
+		}
+		Branch {
+		  Points		  [50, 0]
+		  DstBlock		  "Calculate dif \nbetween two\nmeasures"
+		  DstPort		  1
+		}
+	      }
+	    }
+	    Line {
+	      SrcBlock		      "Calculate dif \nbetween two\nmeasures"
+	      SrcPort		      1
+	      Points		      [0, 25]
+	      DstBlock		      "Sum"
+	      DstPort		      2
+	    }
+	    Line {
+	      SrcBlock		      "Sum"
+	      SrcPort		      1
+	      Points		      [0, 35]
+	      Branch {
+		Points			[0, 25]
+		DstBlock		"If in Range [-2:2]_2"
+		DstPort			1
+	      }
+	      Branch {
+		Points			[-150, 0; 0, -360]
+		DstBlock		"If in Range [-2:2]"
+		DstPort			1
+	      }
 	    }
 	  }
 	}
 	Block {
-	  BlockType		  Sum
-	  Name			  "Sum"
-	  SID			  "110"
-	  Ports			  [2, 1]
-	  Position		  [455, 295, 475, 315]
-	  ZOrder		  -18
-	  ShowName		  off
-	  IconShape		  "round"
-	  Inputs		  "|-+"
-	  InputSameDT		  off
-	  OutDataTypeStr	  "Inherit: Inherit via internal rule"
-	  SaturateOnIntegerOverflow off
-	}
-	Block {
-	  BlockType		  SubSystem
-	  Name			  "Umrechnungsfaktor"
-	  SID			  "10"
+	  BlockType		  Logic
+	  Name			  "Logical\nOperator"
+	  SID			  "294"
 	  Ports			  [1, 1]
-	  Position		  [125, 25, 315, 105]
-	  MinAlgLoopOccurrences	  off
-	  PropExecContextOutsideSubsystem off
-	  RTWSystemCode		  "Auto"
-	  FunctionWithSeparateData off
-	  Opaque		  off
-	  RequestExecContextInheritance	off
-	  MaskHideContents	  off
-	  System {
-	    Name		    "Umrechnungsfaktor"
-	    Location		    [277, 275, 572, 415]
-	    Open		    off
-	    ModelBrowserVisibility  off
-	    ModelBrowserWidth	    200
-	    ScreenColor		    "white"
-	    PaperOrientation	    "landscape"
-	    PaperPositionMode	    "auto"
-	    PaperType		    "A4"
-	    PaperUnits		    "centimeters"
-	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
-	    TiledPageScale	    1
-	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
-	    Block {
-	      BlockType		      Inport
-	      Name		      "Z"
-	      SID		      "11"
-	      Position		      [25, 28, 55, 42]
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant"
-	      SID		      "7"
-	      Position		      [75, 85, 105, 115]
-	      ZOrder		      -4
-	      BlockRotation	      270
-	      NamePlacement	      "alternate"
-	      Value		      "-0.18"
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant1"
-	      SID		      "8"
-	      Position		      [122, 85, 188, 115]
-	      ZOrder		      -4
-	      BlockRotation	      270
-	      Value		      "-5.78862"
-	    }
-	    Block {
-	      BlockType		      Product
-	      Name		      "Product"
-	      SID		      "6"
-	      Ports		      [2, 1]
-	      Position		      [185, 27, 215, 58]
-	      ZOrder		      -13
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      SaturateOnIntegerOverflow	off
-	    }
-	    Block {
-	      BlockType		      Sum
-	      Name		      "Sum"
-	      SID		      "5"
-	      Ports		      [2, 1]
-	      Position		      [80, 25, 100, 45]
-	      ZOrder		      -18
-	      ShowName		      off
-	      IconShape		      "round"
-	      Inputs		      "|+-"
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      SaturateOnIntegerOverflow	off
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "theta"
-	      SID		      "12"
-	      Position		      [250, 38, 280, 52]
-	      IconDisplay	      "Port number"
-	    }
-	    Line {
-	      SrcBlock		      "Constant"
-	      SrcPort		      1
-	      DstBlock		      "Sum"
-	      DstPort		      2
-	    }
-	    Line {
-	      SrcBlock		      "Sum"
-	      SrcPort		      1
-	      DstBlock		      "Product"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Constant1"
-	      SrcPort		      1
-	      Points		      [0, -30]
-	      DstBlock		      "Product"
-	      DstPort		      2
-	    }
-	    Line {
-	      SrcBlock		      "Z"
-	      SrcPort		      1
-	      DstBlock		      "Sum"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Product"
-	      SrcPort		      1
-	      DstBlock		      "theta"
-	      DstPort		      1
-	    }
-	  }
+	  Position		  [380, 534, 410, 566]
+	  ZOrder		  -17
+	  BlockMirror		  on
+	  NamePlacement		  "alternate"
+	  ShowName		  off
+	  Operator		  "NOT"
+	  AllPortsSameDT	  off
+	  OutDataTypeStr	  "boolean"
 	}
 	Block {
-	  BlockType		  SubSystem
-	  Name			  "complement filter"
-	  SID			  "18"
-	  Ports			  [2, 1]
-	  Position		  [510, 45, 655, 120]
-	  MinAlgLoopOccurrences	  off
-	  PropExecContextOutsideSubsystem off
-	  RTWSystemCode		  "Auto"
-	  FunctionWithSeparateData off
-	  Opaque		  off
-	  RequestExecContextInheritance	off
-	  MaskHideContents	  off
-	  System {
-	    Name		    "complement filter"
-	    Location		    [357, 201, 650, 409]
-	    Open		    off
-	    ModelBrowserVisibility  off
-	    ModelBrowserWidth	    200
-	    ScreenColor		    "white"
-	    PaperOrientation	    "landscape"
-	    PaperPositionMode	    "auto"
-	    PaperType		    "A4"
-	    PaperUnits		    "centimeters"
-	    TiledPaperMargins	    [1.270000, 1.270000, 1.270000, 1.270000]
-	    TiledPageScale	    1
-	    ShowPageBoundaries	    off
-	    ZoomFactor		    "100"
-	    Block {
-	      BlockType		      Inport
-	      Name		      "theta_acc"
-	      SID		      "19"
-	      Position		      [25, 28, 55, 42]
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Inport
-	      Name		      "theta_speed_gyro"
-	      SID		      "21"
-	      Position		      [25, 178, 55, 192]
-	      Port		      "2"
-	      IconDisplay	      "Port number"
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant"
-	      SID		      "13"
-	      Position		      [80, 65, 110, 95]
-	      ZOrder		      -4
-	      Value		      "0.02"
-	    }
-	    Block {
-	      BlockType		      Constant
-	      Name		      "Constant1"
-	      SID		      "14"
-	      Position		      [80, 115, 110, 145]
-	      ZOrder		      -4
-	      Value		      "0.98"
-	    }
-	    Block {
-	      BlockType		      DiscreteIntegrator
-	      Name		      "Discrete-Time\nIntegrator"
-	      SID		      "22"
-	      Ports		      [1, 1]
-	      Position		      [105, 169, 140, 201]
-	      ZOrder		      -10
-	      ICPrevOutput	      "DiscIntNeverNeededParam"
-	      ICPrevScaledInput	      "DiscIntNeverNeededParam"
-	    }
-	    Block {
-	      BlockType		      Product
-	      Name		      "Product"
-	      SID		      "15"
-	      Ports		      [2, 1]
-	      Position		      [175, 147, 205, 178]
-	      ZOrder		      -13
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      SaturateOnIntegerOverflow	off
-	    }
-	    Block {
-	      BlockType		      Product
-	      Name		      "Product1"
-	      SID		      "9"
-	      Ports		      [2, 1]
-	      Position		      [155, 27, 185, 58]
-	      ZOrder		      -13
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      SaturateOnIntegerOverflow	off
-	    }
-	    Block {
-	      BlockType		      Sum
-	      Name		      "Sum"
-	      SID		      "16"
-	      Ports		      [2, 1]
-	      Position		      [210, 85, 230, 105]
-	      ZOrder		      -18
-	      ShowName		      off
-	      IconShape		      "round"
-	      Inputs		      "+|+"
-	      InputSameDT	      off
-	      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-	      SaturateOnIntegerOverflow	off
-	    }
-	    Block {
-	      BlockType		      Outport
-	      Name		      "theta_filter"
-	      SID		      "20"
-	      Position		      [255, 88, 285, 102]
-	      IconDisplay	      "Port number"
-	    }
-	    Line {
-	      SrcBlock		      "Product1"
-	      SrcPort		      1
-	      Points		      [30, 0]
-	      DstBlock		      "Sum"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Product"
-	      SrcPort		      1
-	      Points		      [10, 0]
-	      DstBlock		      "Sum"
-	      DstPort		      2
-	    }
-	    Line {
-	      SrcBlock		      "Constant"
-	      SrcPort		      1
-	      Points		      [0, -30]
-	      DstBlock		      "Product1"
-	      DstPort		      2
-	    }
-	    Line {
-	      SrcBlock		      "Constant1"
-	      SrcPort		      1
-	      Points		      [10, 0; 0, 25]
-	      DstBlock		      "Product"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Discrete-Time\nIntegrator"
-	      SrcPort		      1
-	      Points		      [0, -15]
-	      DstBlock		      "Product"
-	      DstPort		      2
-	    }
-	    Line {
-	      SrcBlock		      "theta_acc"
-	      SrcPort		      1
-	      DstBlock		      "Product1"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "Sum"
-	      SrcPort		      1
-	      DstBlock		      "theta_filter"
-	      DstPort		      1
-	    }
-	    Line {
-	      SrcBlock		      "theta_speed_gyro"
-	      SrcPort		      1
-	      DstBlock		      "Discrete-Time\nIntegrator"
-	      DstPort		      1
-	    }
-	  }
+	  BlockType		  Constant
+	  Name			  "prov. Steervalue"
+	  SID			  "274"
+	  Position		  [500, 300, 530, 330]
+	  ZOrder		  -4
+	  Value			  "0"
 	}
 	Block {
-	  BlockType		  Outport
-	  Name			  "theta"
-	  SID			  "114"
-	  Position		  [680, 78, 710, 92]
-	  IconDisplay		  "Port number"
-	}
-	Block {
-	  BlockType		  Outport
-	  Name			  "theta_speed"
-	  SID			  "116"
-	  Position		  [680, 298, 710, 312]
-	  Port			  "2"
-	  IconDisplay		  "Port number"
+	  BlockType		  Constant
+	  Name			  "prov. Stellgröße"
+	  SID			  "273"
+	  Position		  [500, 180, 530, 210]
+	  ZOrder		  -4
+	  Value			  "0"
 	}
 	Line {
-	  SrcBlock		  "Umrechnungsfaktor"
+	  SrcBlock		  "prov. Steervalue"
 	  SrcPort		  1
-	  DstBlock		  "complement filter"
-	  DstPort		  1
+	  DstBlock		  "Control_total"
+	  DstPort		  3
 	}
 	Line {
-	  SrcBlock		  "Subsystem"
+	  SrcBlock		  "gyro"
 	  SrcPort		  1
-	  DstBlock		  "Discrete-Time\nIntegrator"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "Sum"
-	  SrcPort		  1
-	  Points		  [15, 0; 0, -5]
+	  Points		  [140, 0]
 	  Branch {
-	    DstBlock		    "complement filter"
-	    DstPort		    2
-	  }
-	  Branch {
-	    Points		    [0, 5]
-	    DstBlock		    "theta_speed"
-	    DstPort		    1
-	  }
-	}
-	Line {
-	  SrcBlock		  "Discrete-Time\nIntegrator"
-	  SrcPort		  1
-	  DstBlock		  "Sum"
-	  DstPort		  1
-	}
-	Line {
-	  SrcBlock		  "theta_speed_in"
-	  SrcPort		  1
-	  Points		  [15, 0]
-	  Branch {
-	    DstBlock		    "Subsystem"
+	    DstBlock		    "Gyrooffset"
 	    DstPort		    1
 	  }
 	  Branch {
-	    Points		    [0, 90; 390, 0]
-	    DstBlock		    "Sum"
-	    DstPort		    2
+	    Labels		    [0, 0]
+	    DstBlock		    "Control_total"
+	    DstPort		    5
 	  }
 	}
 	Line {
-	  SrcBlock		  "theta_in"
+	  SrcBlock		  "z"
 	  SrcPort		  1
-	  DstBlock		  "Umrechnungsfaktor"
+	  DstBlock		  "Control_total"
+	  DstPort		  2
+	}
+	Line {
+	  SrcBlock		  "Data Store\nRead"
+	  SrcPort		  1
+	  Points		  [0, -120]
+	  Branch {
+	    DstBlock		    "Logical\nOperator"
+	    DstPort		    1
+	  }
+	  Branch {
+	    Points		    [425, 0; 0, -445; -195, 0]
+	    DstBlock		    "Control_total"
+	    DstPort		    ifaction
+	  }
+	}
+	Line {
+	  SrcBlock		  "Logical\nOperator"
+	  SrcPort		  1
+	  DstBlock		  "Gyrooffset"
+	  DstPort		  ifaction
+	}
+	Line {
+	  Labels		  [0, 0]
+	  SrcBlock		  "prov. Stellgröße"
+	  SrcPort		  1
+	  DstBlock		  "Control_total"
 	  DstPort		  1
 	}
 	Line {
-	  SrcBlock		  "complement filter"
+	  SrcBlock		  "phi"
 	  SrcPort		  1
-	  DstBlock		  "theta"
-	  DstPort		  1
+	  DstBlock		  "Control_total"
+	  DstPort		  4
+	}
+	Annotation {
+	  SID			  "215"
+	  Name			  "steervalue = [-1:1]"
+	  Position		  [510, 291]
+	}
+	Annotation {
+	  SID			  "334"
+	  Name			  "phi_speed_soll = [0:900]"
+	  Position		  [519, 168]
 	}
       }
     }
-    Block {
-      BlockType		      Product
-      Name		      "Product"
-      SID		      "136"
-      Ports		      [2, 1]
-      Position		      [600, 287, 630, 318]
-      ZOrder		      -13
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Product
-      Name		      "Product1"
-      SID		      "137"
-      Ports		      [2, 1]
-      Position		      [600, 392, 630, 423]
-      ZOrder		      -13
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Product
-      Name		      "Product2"
-      SID		      "145"
-      Ports		      [2, 1]
-      Position		      [767, 275, 798, 305]
-      ZOrder		      -13
-      BlockRotation	      270
-      BlockMirror	      on
-      NamePlacement	      "alternate"
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Product
-      Name		      "Product3"
-      SID		      "146"
-      Ports		      [2, 1]
-      Position		      [767, 405, 798, 435]
-      ZOrder		      -13
-      BlockRotation	      270
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Sum
-      Name		      "Sum"
-      SID		      "140"
-      Ports		      [2, 1]
-      Position		      [665, 345, 685, 365]
-      ZOrder		      -18
-      ShowName		      off
-      IconShape		      "round"
-      Inputs		      "+|+"
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
-    Block {
-      BlockType		      Sum
-      Name		      "Sum1"
-      SID		      "142"
-      Ports		      [3, 1]
-      Position		      [775, 345, 795, 365]
-      ZOrder		      -18
-      ShowName		      off
-      IconShape		      "round"
-      Inputs		      "+++"
-      InputSameDT	      off
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      SaturateOnIntegerOverflow	off
-    }
     Line {
-      Points		      [120, 230; 240, 0]
-      DstBlock		      "Magic_0.1"
+      SrcBlock		      "Acceleration Sensor"
+      SrcPort		      3
+      DstBlock		      "system_total"
       DstPort		      1
     }
     Line {
       Labels		      [0, 0]
-      Points		      [135, 470; 225, 0]
-      DstBlock		      "Magic_0.1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Magic_0.1"
+      SrcBlock		      "Gyro Sensor"
       SrcPort		      1
-      DstBlock		      "Product"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Magic_0.1"
-      SrcPort		      2
-      DstBlock		      "Product1"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Constant"
-      SrcPort		      1
-      Points		      [30, 0; 0, -110]
-      DstBlock		      "Product1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Constant1"
-      SrcPort		      1
-      Points		      [20, 0; 0, 100]
-      DstBlock		      "Product"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Product"
-      SrcPort		      1
-      Points		      [40, 0]
-      DstBlock		      "Sum"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Product1"
-      SrcPort		      1
-      Points		      [40, 0]
-      DstBlock		      "Sum"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Controller"
-      SrcPort		      1
-      Points		      [45, 0]
-      Branch {
-	Points			[0, -175]
-	DstBlock		"Discrete-Time\nIntegrator"
-	DstPort			1
-      }
-      Branch {
-	Points			[0, 175; -495, 0]
-	DstBlock		"Product3"
-	DstPort			2
-      }
-    }
-    Line {
-      SrcBlock		      "Sum"
-      SrcPort		      1
-      DstBlock		      "Sum1"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Constant2"
-      SrcPort		      1
-      Points		      [-75, 0]
-      DstBlock		      "Product2"
-      DstPort		      2
-    }
-    Line {
-      SrcBlock		      "Discrete-Time\nIntegrator"
-      SrcPort		      1
-      DstBlock		      "Product2"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Constant3"
-      SrcPort		      1
-      Points		      [35, 0]
-      DstBlock		      "Product3"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Sum1"
-      SrcPort		      1
-      Points		      [265, 0; 0, -60]
-      DstBlock		      "Controller"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Product2"
-      SrcPort		      1
-      DstBlock		      "Sum1"
-      DstPort		      1
-    }
-    Line {
-      SrcBlock		      "Product3"
-      SrcPort		      1
-      DstBlock		      "Sum1"
+      DstBlock		      "system_total"
       DstPort		      3
     }
     Line {
-      SrcBlock		      "Constant4"
+      SrcBlock		      "Timer"
       SrcPort		      1
-      DstBlock		      "Controller"
+      Points		      [65, 0]
+      Branch {
+	DstBlock		"Compare\nTo Constant"
+	DstPort			1
+      }
+      Branch {
+	Points			[0, 75]
+	DstBlock		"If"
+	DstPort			1
+      }
+    }
+    Line {
+      SrcBlock		      "Compare\nTo Constant"
+      SrcPort		      1
+      DstBlock		      "Set offset_flag = 0"
+      DstPort		      ifaction
+    }
+    Line {
+      SrcBlock		      "Data Store\nRead"
+      SrcPort		      1
+      DstBlock		      "If"
       DstPort		      2
+    }
+    Line {
+      SrcBlock		      "If"
+      SrcPort		      1
+      DstBlock		      "Set offset_flag = 1"
+      DstPort		      ifaction
+    }
+    Line {
+      SrcBlock		      "phi.get"
+      SrcPort		      1
+      DstBlock		      "system_total"
+      DstPort		      2
+    }
+    Annotation {
+      SID		      "324"
+      Name		      "1 : offset subroutine has run\n0 : offset subroutine has yet to run"
+      Position		      [117, 79]
+      HorizontalAlignment     "left"
+    }
+    Annotation {
+      SID		      "326"
+      Name		      "gyro offset"
+      Position		      [144, 44]
     }
   }
 }
